@@ -1,0 +1,1 @@
+export const ELECTRON_SERVICE = "ELECTRON_SERVICE"
