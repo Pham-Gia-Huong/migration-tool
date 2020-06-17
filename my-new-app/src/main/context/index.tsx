@@ -1,11 +1,12 @@
 import React, {useReducer} from 'react';
 import electronReducer from './reducer/electronService';
+import {migrationValue} from './reducer/electronService/defaultData'
 
-const context = React.createContext({});
-const Provider = (props) => {
-  const [elState, elDispatch] = useReducer(electronReducer, {});
+const context = React.createContext<Partial<ContextProps>>({});
+const Provider = (props:JSX.ElementChildrenAttribute) => {
+  const [elState, elDispatch] = useReducer(electronReducer, migrationValue);
   const combine = {
-    electronService: {
+    migration: {
       state: elState,
       dispatch: elDispatch,
     },

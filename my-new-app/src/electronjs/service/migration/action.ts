@@ -2,11 +2,16 @@ import {Migration} from 'migration-tool';
 
 let migration = new Migration();
 
-const migrateRecords = (arg: any) => {
+const migrateRecords = (data: any) => {
   return migration
-    .records((records) => ({app: arg.toId, records}), {app: arg.fromId})
-    .from(arg.fromDomain, {apiToken: arg.tokenFrom})
-    .to(arg.toDomain, {apiToken: arg.tokenTo})
+    .records(
+      (records) => {
+        return {app: data.toApp, records};
+      },
+      {app: data.fromApp}
+    )
+    .from(data.fromDomain, {apiToken: data.tokenAppFrom})
+    .to(data.toDomain, {apiToken: data.tokenAppTo})
     .run();
 };
 

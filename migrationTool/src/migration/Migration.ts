@@ -98,9 +98,9 @@ export class Migration {
   }
 
   private async _getRecordsWithCallback<T extends RecordType>(
-    client: Client, params: GetRecords, callback: (params: T[]) => CallbackResponse | Promise<CallbackResponse>) {
+    client: Client, params: GetRecords, callback: (params: T[]) => CallbackResponse | Promise<CallbackResponse>) {      
     const response = await getRecords(client, params);
-
+ 
     const requestParams = await callback(response.records as T[]);
 
     this._requestParams = this._getRequestParams(requestParams);

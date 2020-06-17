@@ -1,0 +1,40 @@
+.modal-wrap {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+}
+.modal-popup {
+  width: 200px;
+  height: 200px;
+  max-width: 500px;
+  max-height: 500px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  word-break: break-word;
+}
+.modal-icon {
+  color: white;
+  border-radius: 50%;
+  padding: 30px;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+.success {
+  background: #82ce34;
+}
+.danger {
+  background: red;
+}
+.modal-text {
+  color: black;
+}

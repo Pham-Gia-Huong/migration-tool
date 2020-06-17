@@ -1,15 +1,38 @@
-import {ipcRenderer} from 'electron';
 import * as actionCreator from './actionType';
-const listener = (e: any, data: any) => {
+
+const migrateRecordsRequest = (): migrateRecordsAction => {
   return {
-    type: actionCreator.ELECTRON_SERVICE,
-    data,
+    type: actionCreator.MIGRATE_RECORDS_REQUEST,
+    data: {
+      status: null,
+      records: null,
+      isLoading: null,
+    },
   };
 };
 
-const request = (action: string, data: any) => {
-  ipcRenderer.send(`${action}-request`, data);
-  ipcRenderer.on(`${action}-response`, listener);
+const migrateRecordsSuccess = (data: any): migrateRecordsAction => {
+  return {
+    type: actionCreator.MIGRATE_RECORDS_SUCCESS,
+    data: {
+      status: data.status,
+      records: data.records,
+      isLoading: false,
+    },
+  };
 };
 
-export {request}
+const migrateRecordsFail = (data: any): migrateRecordsAction => {
+  return {
+    type: actionCreator.MIGRATE_RECORDS_ERROR,
+    data: {
+      status: data.status,
+      error: data.error,
+      isLoading: false,
+    },
+  };
+};
+
+
+
+export {migrateRecordsRequest,migrateRecordsSuccess};
