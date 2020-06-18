@@ -15,8 +15,8 @@ interface migrateRecordsAction {
     | typeof import('./actionType').MIGRATE_RECORDS_REQUEST
     | typeof import('./actionType').MIGRATE_RECORDS_SUCCESS
     | typeof import('./actionType').MIGRATE_RECORDS_ERROR;
-  data: migrateRecordsSuccess | migrateRecordsFail;
+  data:   migrateRecordsFail |migrateRecordsSuccess;
 }
 
-declare type StateMigrate = migrateRecordsSuccess | migrateRecordsFail;
+declare type StateMigrate = migrateRecordsFail | migrateRecordsSuccess ;
 declare type ActionMigrate = migrateRecordsAction;

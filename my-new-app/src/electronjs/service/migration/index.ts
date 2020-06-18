@@ -4,8 +4,8 @@ import {migrateRecords} from './action';
 
 const resultIpcMain = (event: Electron.IpcMainEvent, record: Promise<any>) => {  
   record
-    .then((data) => event.reply('migrate-response-success', {status: 'success', records:data}))
-    .catch((error) => event.reply('migrate-response-fail', {status: 'fail', error}));
+    .then((data) => event.reply('migrate-response', {status: 'success', records:data}))
+    .catch((error) => event.reply('migrate-response', {status: 'fail', error}));
     return event;
 };
 

@@ -49,36 +49,3 @@
 .from-form-expland-title {
   margin-right: 10px
 }
-
-.wrap-from {
-  display: table;
-  border-spacing: 10px;
-}
-
-.wrap-from-arrow {
-  display: table-cell;
-  vertical-align: middle;
-  width: 50px;
-  text-align: center;
-  font-size: 50px;
-  color: gray;
-}
-
-.wrap-from-add {
-  display: table-cell;
-  position: relative;
-  vertical-align: middle;
-  width: 50px;
-  text-align: center;
-  font-size: 40px;
-  cursor: pointer;
-  color: gray;
-}
-
-.wrap-from-add-hover:hover {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-}

@@ -17,8 +17,8 @@ const listener = (e: any, data: any, migrateRecords:{RecordsFail:(data:migrateRe
 const request = (type: string, data: any,migrateRecords:{RecordsFail:(data:migrateRecordsFail)=>void, RecordsRequest:()=>void,RecordsSuccess:(data:migrateRecordsSuccess)=>void}) => {
   migrateRecords.RecordsRequest()
   ipcRenderer.send(`${type}-request`, data);
-  ipcRenderer.once(`${type}-response-success`, (e, dataResponse) => listener(e, dataResponse,  migrateRecords));
-  ipcRenderer.once(`${type}-response-fail`, (e, dataResponse) => listener(e, dataResponse,  migrateRecords));
+  ipcRenderer.once(`${type}-response`, (e, dataResponse) => listener(e, dataResponse,  migrateRecords));
+  ipcRenderer.once(`${type}-response`, (e, dataResponse) => listener(e, dataResponse,  migrateRecords));
 
 };
 export {request}

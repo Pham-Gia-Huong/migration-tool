@@ -1,10 +1,18 @@
 import React from 'react';
+import './index.css';
 import Provider from './context';
-import MigrateAllRecord from './views/MigrateAllRecords';
+import LeftSide from './views/Left';
+import {useRoutes, A} from 'hookrouter';
+import {routes} from './routes';
+
 const App = () => {
+  const routeResult = useRoutes(routes);
   return (
     <Provider>
-      <MigrateAllRecord />
+      <div className="container-main">
+        <LeftSide />
+        {routeResult}
+      </div>
     </Provider>
   );
 };
