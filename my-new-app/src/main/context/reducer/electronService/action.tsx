@@ -4,9 +4,9 @@ const migrateRecordsRequest = (): migrateRecordsAction => {
   return {
     type: actionCreator.MIGRATE_RECORDS_REQUEST,
     data: {
-      status: null,
+      status: "",
       records: null,
-      isLoading: null,
+      isLoading: true,
     },
   };
 };
@@ -33,6 +33,4 @@ const migrateRecordsFail = (data: any): migrateRecordsAction => {
   };
 };
 
-
-
-export {migrateRecordsRequest,migrateRecordsSuccess};
+export {migrateRecordsRequest,migrateRecordsSuccess,migrateRecordsFail};

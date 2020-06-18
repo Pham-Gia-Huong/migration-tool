@@ -9,32 +9,42 @@
   justify-content: center;
   align-items: center;
 }
+
 .modal-popup {
+  z-index: 9999;
   width: 200px;
   height: 200px;
   max-width: 500px;
   max-height: 500px;
   background: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: table;
   padding: 20px;
-  word-break: break-word;
+  text-align: center;
 }
+
 .modal-icon {
+  display: inline-table;
   color: white;
   border-radius: 50%;
   padding: 30px;
   font-size: 25px;
   margin-bottom: 20px;
 }
+
 .success {
   background: #82ce34;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
 .danger {
   background: red;
 }
+
 .modal-text {
+  word-break: break-word;
+  text-align: left;
   color: black;
 }

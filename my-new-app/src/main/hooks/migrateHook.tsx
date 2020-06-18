@@ -4,11 +4,11 @@ import { useContext } from 'react';
 export default () => {
   const {migration} = useContext(context);
   let dispatch = migration.dispatch;
-  let state = migration.state;
+  let state = migration.state;  
   return {
-    migrateRecords: (data: migrateRecordsSuccess) => {
-      dispatch(migrationAction.migrateRecordsRequest())
-      dispatch(migrationAction.migrateRecordsSuccess({status:"hehe",records:[],isLoading:false}))
-    },
+   RecordsRequest:()=>dispatch(migrationAction.migrateRecordsRequest()),
+    RecordsSuccess: (data: migrateRecordsSuccess) =>  dispatch(migrationAction.migrateRecordsSuccess(data)),
+    RecordsFail: (data: migrateRecordsFail) =>  dispatch(migrationAction.migrateRecordsFail(data))
+
   };
 };

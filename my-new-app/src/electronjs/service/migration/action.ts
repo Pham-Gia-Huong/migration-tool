@@ -1,17 +1,19 @@
-import {Migration} from 'migration-tool';
+import {Migration} from '../../../../node_modules/migration-tool/dist';
 
-let migration = new Migration();
-
-const migrateRecords = (data: any) => {
+const migrateRecords = (data: any) => {  
+  let migration = new Migration();
+  let newData= JSON.parse(JSON.stringify(data))
+  newData.toApp=Number(newData.toApp)
+  newData.fromApp=Number(newData.fromApp)  
   return migration
     .records(
-      (records) => {
-        return {app: data.toApp, records};
+      (records) => {                
+        return {app: Number(newData.toApp), records};
       },
-      {app: data.fromApp}
+      {app: Number(newData.fromApp)}
     )
-    .from(data.fromDomain, {apiToken: data.tokenAppFrom})
-    .to(data.toDomain, {apiToken: data.tokenAppTo})
+    .from(newData.fromDomain, {apiToken: newData.tokenAppFrom})
+    .to(newData.toDomain, {apiToken: newData.tokenAppTo})
     .run();
 };
 

@@ -1,0 +1,84 @@
+.from-form-input {
+  display: table-cell;
+  padding: 10px;
+}
+
+.from-form {
+  display: table-cell;
+  margin: 10px
+}
+
+.from-form[title="get"] {
+  border: 2px solid blue;
+
+}
+
+.from-form[title="set"] {
+  border: 2px solid orangered;
+
+}
+
+.from-form[title="get"] .from-form-title {
+  background: blue;
+
+}
+
+.from-form[title="set"] .from-form-title {
+  background: orangered;
+
+}
+
+.from-form-title {
+  color: white;
+  text-align: center;
+
+  padding: 8px;
+}
+
+.from-form-expland {
+  background: #34242454;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.from-form-expland-title {
+  margin-right: 10px
+}
+
+.wrap-from {
+  display: table;
+  border-spacing: 10px;
+}
+
+.wrap-from-arrow {
+  display: table-cell;
+  vertical-align: middle;
+  width: 50px;
+  text-align: center;
+  font-size: 50px;
+  color: gray;
+}
+
+.wrap-from-add {
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  width: 50px;
+  text-align: center;
+  font-size: 40px;
+  cursor: pointer;
+  color: gray;
+}
+
+.wrap-from-add-hover:hover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}

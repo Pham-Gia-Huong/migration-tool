@@ -1,13 +1,13 @@
 interface migrateRecordsSuccess {
   status: string;
   records: any;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 interface migrateRecordsFail {
   status: string;
-  error: any;
-  isLoading: boolean;
+  error: string;
+  isLoading?: boolean;
 }
 
 interface migrateRecordsAction {
