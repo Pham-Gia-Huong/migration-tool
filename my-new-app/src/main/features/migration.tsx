@@ -6,6 +6,8 @@ const parseDataMigrateRecords = ({
   type,
   tokenAppFrom,
   tokenAppTo,
+  query,
+  fields,
 }: {
   fromDomain: string;
   toDomain: string;
@@ -14,19 +16,26 @@ const parseDataMigrateRecords = ({
   type: string;
   tokenAppFrom: string;
   tokenAppTo: string;
-}) => ({
-  data: {
-    fromDomain,
-    toDomain,
-    fromApp,
-    toApp,
-    tokenAppFrom,
-    tokenAppTo,
-  },
-  type,
-});
+  query: string;
+  fields: string;
+}) => {
+  let fieldsList = fields.split(',');
+  return {
+    data: {
+      fromDomain,
+      toDomain,
+      fromApp,
+      toApp,
+      tokenAppFrom,
+      tokenAppTo,
+      query,
+      fields: fieldsList,
+    },
+    type,
+  };
+};
 
-const isLoadMigrateRecords = (status: string) => {  
+const isLoadMigrateRecords = (status: string) => {
   if (status === 'loading') {
     return true;
   }

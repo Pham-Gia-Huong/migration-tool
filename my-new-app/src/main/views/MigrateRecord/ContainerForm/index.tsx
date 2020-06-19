@@ -1,8 +1,10 @@
 import React from 'react';
 import './index.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import FormMigrate from '../FormMigrate'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCaretRight, faPlusCircle} from '@fortawesome/free-solid-svg-icons';
+import FormFromMigrate from '../FormFromMigrate';
+import FormToMigrate from '../FormToMigrate';
+
 const ContainerForm = ({
   fromDomain,
   fromApp,
@@ -16,6 +18,10 @@ const ContainerForm = ({
   setToDomain,
   setToApp,
   setTokenAppTo,
+  setQuery,
+  setFields,
+  query,
+  fields,
 }: {
   fromDomain: string;
   fromApp: number;
@@ -29,6 +35,10 @@ const ContainerForm = ({
   setFromDomain: React.Dispatch<React.SetStateAction<string>>;
   setTokenAppFrom: React.Dispatch<React.SetStateAction<string>>;
   setFromApp: React.Dispatch<React.SetStateAction<number>>;
+  query?: string;
+  fields?: string;
+  setQuery?: React.Dispatch<React.SetStateAction<string>>;
+  setFields?: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const hoverContainer = () => {
     let parentNode = document.getElementsByClassName('wrap-from')[0] as HTMLElement;
@@ -49,7 +59,7 @@ const ContainerForm = ({
   };
   return (
     <div className="wrap-from">
-      <FormMigrate
+      <FormFromMigrate
         title={'get'}
         name={'Get App'}
         domain={fromDomain}
@@ -58,11 +68,15 @@ const ContainerForm = ({
         setDomain={setFromDomain}
         setToken={setTokenAppFrom}
         setApp={setFromApp}
+        query={query}
+        setQuery={setQuery}
+        fields={fields}
+        setFields={setFields}
       />
       <div className="wrap-from-arrow">
         <FontAwesomeIcon icon={faCaretRight} />
       </div>
-      <FormMigrate
+      <FormToMigrate
         title={'set'}
         name={'Set App'}
         domain={toDomain}

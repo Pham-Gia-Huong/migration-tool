@@ -1,25 +1,21 @@
 import React from 'react';
-import './index.css'
+import './index.css';
 import Sidebar from '../../components/Sidebar';
-import {useRedirect} from 'hookrouter';
-
+import {withRouter} from 'react-router';
 import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
-
-const LeftSide = () => {
+import {navigationToPage} from '../../features/left';
+const LeftSide = ({history}: {history: any}) => {
   return (
     <div className="left-side">
       <Sidebar
-        onClick={(name)=>{
-          console.log("name",name)
-          // useRedirect("/migrateConfig");
-        }}
+        onClick={(key: number, item: any) => navigationToPage(key, item, history)}
         listItem={[
-          {name: 'hehe', icon: faThumbsUp},
-          {name: 'haha', icon: faThumbsDown},
+          {name: 'Home', icon: faThumbsUp},
+          {name: 'Setting', icon: faThumbsDown},
         ]}
       />
     </div>
   );
 };
 
-export default LeftSide;
+export default (LeftSide);

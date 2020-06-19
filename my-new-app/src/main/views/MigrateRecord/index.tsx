@@ -15,6 +15,9 @@ const MigrateAllRecord = () => {
   const [tokenAppFrom, setTokenAppFrom] = useState('');
   const [toApp, setToApp] = useState(0);
   const [tokenAppTo, setTokenAppTo] = useState('');
+  const [query, setQuery] = useState('null');
+  const [fields, setFields] = useState('null');
+
   const {migration} = useContext(context);
   const useMigration = migrationHook();
   const stateError = migration.state as migrateRecordsFail;
@@ -35,6 +38,10 @@ const MigrateAllRecord = () => {
         setToDomain={setToDomain}
         setToApp={setToApp}
         setTokenAppTo={setTokenAppTo}
+        query={query}
+        setQuery={setQuery}
+        fields={fields}
+        setFields={setFields}
       />
       <Button
         label={'Migrate Records'}
@@ -47,7 +54,9 @@ const MigrateAllRecord = () => {
             tokenAppFrom,
             tokenAppTo,
             type: 'RECORDS',
-          });          
+            query,
+            fields,
+          });
           request('migrate', migrateRecordsValue, useMigration);
         }}
       />

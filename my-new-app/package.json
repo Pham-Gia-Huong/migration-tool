@@ -88,7 +88,9 @@
     "eslint-plugin-import": "^2.21.2",
     "fork-ts-checker-webpack-plugin": "^3.1.1",
     "hookrouter": "^1.2.3",
+    "html-webpack-plugin": "^4.3.0",
     "node-loader": "^0.6.0",
+    "react-router": "^5.2.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.2.2",
     "typescript": "^3.9.5"
@@ -98,9 +100,11 @@
     "@types/hookrouter": "^2.2.2",
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
     "electron-squirrel-startup": "^1.0.0",
     "migration-tool": "file:../migrationTool",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
   }
 }

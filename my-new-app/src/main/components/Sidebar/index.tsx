@@ -3,12 +3,12 @@ import './index.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Item} from './type';
 
-const ItemList = ({listItem, onClick}: {onClick?: (item:Item) => void; listItem: Item[]}) => {
+const ItemList = ({listItem, onClick}: {onClick?: (index:number,item:Item) => void; listItem: Item[]}) => {
   return (
     <React.Fragment>
-      {listItem.map((item, key) => {
+      {listItem.map((item, key) => {        
         return (
-          <div className="sidebar-item" key={key} onClick={(item)=> onClick(item)}>
+          <div className="sidebar-item" key={key} onClick={()=> onClick(key, item)}>
             <div className="sidebar-item-icon">
               <FontAwesomeIcon icon={item.icon} />
             </div>
@@ -20,10 +20,10 @@ const ItemList = ({listItem, onClick}: {onClick?: (item:Item) => void; listItem:
   );
 };
 
-const Sidebar = ({listItem, onClick}: {onClick?: (item:Item) => void; listItem: Item[]}) => {
+const Sidebar = ({listItem, onClick}: {onClick?: (index:number,item:Item) => void; listItem: Item[]}) => {
   return (
     <div className="sidebar">
-      <ItemList listItem={listItem} onClick={(item)=> onClick(item)} />
+      <ItemList listItem={listItem} onClick={(key,item)=> onClick(key,item)} />
     </div>
   );
 };
