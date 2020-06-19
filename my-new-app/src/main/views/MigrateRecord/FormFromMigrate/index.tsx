@@ -19,20 +19,7 @@ const FormInput = ({
   setFields,
   query,
   fields,
-}: {
-  name: string;
-  title: string;
-  domain: string;
-  app: number;
-  token: string;
-  setDomain: (value: any) => void;
-  setApp: (value: number) => void;
-  setToken: (value: string) => void;
-  query?: string;
-  fields?: string;
-  setQuery?: React.Dispatch<React.SetStateAction<string>>;
-  setFields?: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+}: FormFromMigrate) => {
   return (
     <div className="from-form" title={title}>
       <div className="from-form-title">{name}</div>

@@ -12,16 +12,7 @@ const FormToMigrate = ({
   setApp,
   setToken,
 
-}: {
-  name: string;
-  title: string;
-  domain: string;
-  app: number;
-  token: string;
-  setDomain: (value: any) => void;
-  setApp: (value: number) => void;
-  setToken: (value: string) => void;
-}) => {
+}: FormToMigrate) => {
   return (
     <div className="from-form" title={title}>
       <div className="from-form-title">{name}</div>

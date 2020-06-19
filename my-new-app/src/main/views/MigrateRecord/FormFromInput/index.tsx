@@ -8,14 +8,7 @@ const FormFromInput = ({
   setDomain,
   setApp,
   setToken,
-}: {
-  domain: string;
-  app: number;
-  token: string;
-  setDomain: (value: any) => void;
-  setApp: (value: number) => void;
-  setToken: (value: string) => void;
-}) => {
+}: FormFromInput) => {
   return (
     <React.Fragment>
       <InputField type={'text'} label={'From Domain'} defaultValue={domain} onChange={(value: string) => setDomain(value)} />

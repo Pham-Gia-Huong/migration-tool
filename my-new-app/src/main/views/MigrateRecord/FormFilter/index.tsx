@@ -6,12 +6,7 @@ const FormFilter = ({
   fields,
   setQuery,
   setFields,
-}: {
-  query: string;
-  fields: string;
-  setQuery: (value: string) => void;
-  setFields: (value: string) => void;
-}) => {
+}: FormFilter) => {
   return (
     <React.Fragment>
       <InputField type={'text'} label={'query'} defaultValue={query} onChange={(value: string) => setQuery(value)} />

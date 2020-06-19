@@ -22,24 +22,7 @@ const ContainerForm = ({
   setFields,
   query,
   fields,
-}: {
-  fromDomain: string;
-  fromApp: number;
-  tokenAppFrom: string;
-  toDomain: string;
-  toApp: number;
-  tokenAppTo: string;
-  setToDomain: React.Dispatch<React.SetStateAction<string>>;
-  setToApp: React.Dispatch<React.SetStateAction<number>>;
-  setTokenAppTo: React.Dispatch<React.SetStateAction<string>>;
-  setFromDomain: React.Dispatch<React.SetStateAction<string>>;
-  setTokenAppFrom: React.Dispatch<React.SetStateAction<string>>;
-  setFromApp: React.Dispatch<React.SetStateAction<number>>;
-  query?: string;
-  fields?: string;
-  setQuery?: React.Dispatch<React.SetStateAction<string>>;
-  setFields?: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+}: ContainerForm) => {
   const hoverContainer = () => {
     let parentNode = document.getElementsByClassName('wrap-from')[0] as HTMLElement;
     parentNode.style.border = '2px solid #34242454';

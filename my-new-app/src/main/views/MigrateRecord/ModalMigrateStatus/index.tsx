@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Spinner from "../../../components/Spinner";
 import Modal from "../../../components/Modal";
 
-const ModalMigrateStatus = ({error, isLoading, status}: {error: string; isLoading: boolean; status: string}) => {
+const ModalMigrateStatus = ({error, isLoading, status}: ModalMirateStatus) => {
   const [isShow, setIsShow] = useState(!isLoading);
   useEffect(() => {
     setIsShow(!isLoading);
