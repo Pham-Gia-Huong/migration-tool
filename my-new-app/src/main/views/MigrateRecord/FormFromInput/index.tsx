@@ -1,5 +1,5 @@
 import React from 'react';
-import InputField from '../../../components/Input/Input';
+import InputField from '../../../components/Input';
 
 const FormFromInput = ({
   domain,
@@ -11,9 +11,9 @@ const FormFromInput = ({
 }: FormFromInput) => {
   return (
     <React.Fragment>
-      <InputField type={'text'} label={'From Domain'} defaultValue={domain} onChange={(value: string) => setDomain(value)} />
-      <InputField type={'number'} label={'From App'} defaultValue={app} onChange={(value: number) => setApp(value)} />
-      <InputField type={'text'} label={'Token App From'} defaultValue={token} onChange={(value: string) => setToken(value)} />
+      <InputField type={'text'} label={"Domain"} defaultValue={domain} onChange={(value: string) => setDomain(value)} />
+      <InputField type={'number'} label={"App"} defaultValue={app} onChange={(value: number) => setApp(value)} />
+      <InputField type={'text'} label={"token"} defaultValue={token} onChange={(value: string) => setToken(value)} />
     </React.Fragment>
   );
 };

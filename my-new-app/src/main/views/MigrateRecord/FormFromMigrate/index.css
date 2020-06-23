@@ -4,6 +4,8 @@
 }
 
 .from-form {
+  position: relative;
+  overflow: auto;
   display: table-cell;
   margin: 10px
 }

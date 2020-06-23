@@ -1,0 +1,11 @@
+.field-map-wrapped {
+  display: flex;
+  margin-bottom: 10px;
+}
+.field-map-wrapped > svg{
+  margin-right: 10px;
+  transform: translate(0px, 5px);
+}
+.field-map-wrapped > .dropdown{
+  width: 100%;
+}

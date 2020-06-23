@@ -1,5 +1,6 @@
-import {app, BrowserWindow} from 'electron';
-import './service/migration/index'
+import {app, BrowserWindow, ipcMain} from 'electron';
+import './service/index'
+import { listener } from './service/index';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -41,7 +42,6 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-app.commandLine.appendSwitch('proxy-server', '172.17.0.2:3128');
 
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
@@ -51,6 +51,9 @@ app.on('activate', () => {
   }
 });
 
+
+
+ipcMain.on('request', listener);
 
 
 // In this file you can include the rest of your app's specific main process

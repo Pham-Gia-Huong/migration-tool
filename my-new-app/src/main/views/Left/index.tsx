@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './index.css';
 import Sidebar from '../../components/Sidebar';
-import {withRouter} from 'react-router';
 import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
 import {navigationToPage} from '../../features/left';
-const LeftSide = ({history}: {history: any}) => {
+import appHook from '../../hooks/appHook';
+import migrateHook from '../../hooks/migrateHook';
+
+const LeftSide = ({history}: {history?: any}) => {
+  const useApp = appHook();
+  const useMigrate = migrateHook();
   return (
     <div className="left-side">
       <Sidebar
-        onClick={(key: number, item: any) => navigationToPage(key, item, history)}
+        onClick={(key: number, item: any) => {
+          navigationToPage(key, item, history);
+          useApp.clearError();
+          useMigrate.clearError();
+        }}
         listItem={[
-          {name: 'Home', icon: faThumbsUp},
+          {name: 'Login', icon: faThumbsUp},
           {name: 'Setting', icon: faThumbsDown},
         ]}
       />
@@ -18,4 +26,4 @@ const LeftSide = ({history}: {history: any}) => {
   );
 };
 
-export default (LeftSide);
+export default LeftSide;

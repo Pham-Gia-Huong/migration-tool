@@ -1,7 +1,7 @@
-import React from 'react'
-import { useEffect, useState } from "react";
-import Spinner from "../../../components/Spinner";
-import Modal from "../../../components/Modal";
+import React from 'react';
+import {useEffect, useState} from 'react';
+import Spinner from './../../components/Spinner';
+import Modal from './../../components/Modal';
 
 const ModalMigrateStatus = ({error, isLoading, status}: ModalMirateStatus) => {
   const [isShow, setIsShow] = useState(!isLoading);

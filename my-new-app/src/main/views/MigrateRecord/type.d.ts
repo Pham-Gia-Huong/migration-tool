@@ -11,32 +11,44 @@ interface FormFilter {
   setFields: (value: string) => void;
 }
 
-interface FormFromInput {
+interface AppForm {
   domain: string;
   app: number;
   token: string;
+}
+
+interface FormFromInput extends AppForm {
   setDomain: (value: any) => void;
   setApp: (value: number) => void;
   setToken: (value: string) => void;
 }
+interface FieldDropdown {
+  fieldList?: {
+    label: string;
+    value: string;
+  };
+}
 
-interface FormToMigrate extends FormFromInput {
+interface FormToMigrate extends FormFromInput, FieldDropdown {
   name: string;
   title: string;
 }
 
-interface FormFromMigrate extends FormFromInput, FormFilter {
+interface FormFromMigrate extends FormFromInput, FormFilter, FieldDropdown {
   name: string;
   title: string;
 }
 
-interface ContainerForm extends FormFilter {
+interface InforAuth {
   fromDomain: string;
   fromApp: number;
   tokenAppFrom: string;
   toDomain: string;
   toApp: number;
   tokenAppTo: string;
+}
+
+interface ContainerForm extends FormFilter, InforAuth {
   setToDomain: React.Dispatch<React.SetStateAction<string>>;
   setToApp: React.Dispatch<React.SetStateAction<number>>;
   setTokenAppTo: React.Dispatch<React.SetStateAction<string>>;

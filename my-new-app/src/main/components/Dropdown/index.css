@@ -1,0 +1,24 @@
+.dropdown {
+  position: relative;
+}
+
+.dropdown-list {
+  width: 100%;
+  display: none;
+}
+
+.dropdown-text {
+  background: #4caf50;
+  color: white;
+  padding: 5px 10px;
+}
+
+.dropdown-item {
+  background: gray;
+  color: black;
+  padding: 5px 10px;
+}
+
+.dropdown-item:hover {
+  background: #fff;
+}

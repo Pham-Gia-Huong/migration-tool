@@ -3,36 +3,51 @@ const parseDataMigrateRecords = ({
   toDomain,
   fromApp,
   toApp,
-  type,
   tokenAppFrom,
   tokenAppTo,
   query,
   fields,
+  fieldMapFromTo,
 }: {
   fromDomain: string;
   toDomain: string;
   fromApp: number;
   toApp: number;
-  type: string;
   tokenAppFrom: string;
   tokenAppTo: string;
-  query: string;
-  fields: string;
+  query?: string;
+  fields?: string;
+  fieldMapFromTo?: {
+    from: string;
+    to: string;
+  }[];
 }) => {
-  let fieldsList = fields.split(',');
+  let fieldsList = [] as any[];
+  if (fields) {
+    fieldsList = fields.split(',');
+  }
   return {
-    data: {
-      fromDomain,
-      toDomain,
-      fromApp,
-      toApp,
-      tokenAppFrom,
-      tokenAppTo,
-      query,
-      fields: fieldsList,
-    },
-    type,
+    fromDomain,
+    toDomain,
+    fromApp,
+    toApp,
+    tokenAppFrom,
+    tokenAppTo,
+    query,
+    fields: fieldsList,
+    fieldMapFromTo,
   };
+};
+
+const parseFieldMapFromTo = (fieldMapList: fieldMap[]) => {
+  let fieldMapFromToList = JSON.parse(JSON.stringify(fieldMapList)) as fieldMap[];
+  let fieldMapFromTo = fieldMapFromToList.map((fieldMap) => {
+    return {
+      from: fieldMap.from.value,
+      to: fieldMap.to.value,
+    } as {from: string; to: string};
+  }) as {from: string; to: string}[];
+  return fieldMapFromTo;
 };
 
 const isLoadMigrateRecords = (status: string) => {
@@ -41,4 +56,5 @@ const isLoadMigrateRecords = (status: string) => {
   }
   return false;
 };
-export {parseDataMigrateRecords, isLoadMigrateRecords};
+
+export {parseDataMigrateRecords, isLoadMigrateRecords, parseFieldMapFromTo};

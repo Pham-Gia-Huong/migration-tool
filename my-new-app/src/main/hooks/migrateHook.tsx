@@ -1,14 +1,20 @@
 import * as migrationAction from '../context/reducer/electronService/action';
-import {context} from '../context'
-import { useContext } from 'react';
+import * as baseAction from '../context/reducer/base/action';
+import {context} from '../context';
+import {useContext} from 'react';
 export default () => {
   const {migration} = useContext(context);
   let dispatch = migration.dispatch;
-  let state = migration.state;  
   return {
-   RecordsRequest:()=>dispatch(migrationAction.migrateRecordsRequest()),
-    RecordsSuccess: (data: migrateRecordsSuccess) =>  dispatch(migrationAction.migrateRecordsSuccess(data)),
-    RecordsFail: (data: migrateRecordsFail) =>  dispatch(migrationAction.migrateRecordsFail(data))
+    request: () => dispatch(baseAction.request()),
+
+    RecordsSuccess: (data: migrateRecordsSuccess) => dispatch(migrationAction.migrateRecordsSuccess(data)),
+    RecordsFail: (data: migrateRecordsFail) => dispatch(migrationAction.migrateRecordsFail(data)),
+
+    getFormSuccess: (data: migrateRecordsSuccess) => dispatch(migrationAction.migrateRecordsSuccess(data)),
+    getFormFail: (data: migrateRecordsFail) => dispatch(migrationAction.migrateRecordsFail(data)),
+
+    clearError:()=> dispatch(baseAction.clearError())
 
   };
 };

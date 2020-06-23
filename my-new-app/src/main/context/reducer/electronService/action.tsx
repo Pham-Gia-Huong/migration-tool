@@ -1,16 +1,5 @@
 import * as actionCreator from './actionType';
 
-const migrateRecordsRequest = (): migrateRecordsAction => {
-  return {
-    type: actionCreator.MIGRATE_RECORDS_REQUEST,
-    data: {
-      status: "",
-      records: null,
-      isLoading: true,
-    },
-  };
-};
-
 const migrateRecordsSuccess = (data: any): migrateRecordsAction => {
   return {
     type: actionCreator.MIGRATE_RECORDS_SUCCESS,
@@ -33,4 +22,13 @@ const migrateRecordsFail = (data: any): migrateRecordsAction => {
   };
 };
 
-export {migrateRecordsRequest,migrateRecordsSuccess,migrateRecordsFail};
+const getFormRequest = (records: any) => {
+  return {
+    type: actionCreator.MIGRATE_RECORDS_ERROR,
+    data: {
+      records,
+    },
+  };
+};
+
+export {migrateRecordsSuccess, migrateRecordsFail, getFormRequest};

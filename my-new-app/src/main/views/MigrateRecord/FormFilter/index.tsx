@@ -1,5 +1,5 @@
 import React from 'react';
-import InputField from '../../../components/Input/Input';
+import InputField from '../../../components/Input';
 
 const FormFilter = ({
   query,

@@ -1,22 +1,27 @@
 import {ipcRenderer} from 'electron';
+import * as migrationType from '../../electronjs/service/migration/type';
+import * as appType from '../../electronjs/service/app/type';
 
-const listener = (e: any, data: any, migrateRecords:{RecordsFail:(data:migrateRecordsFail)=>void, RecordsRequest:()=>void,RecordsSuccess:(data:migrateRecordsSuccess)=>void}) => {   
-  if(!data.error){
-    migrateRecords.RecordsSuccess({
-      status: data.status,
-      records: data.records,
-    });
-    return;
+import {saveRecodsMigrate} from './electron/';
+import {getFormField} from './app/index';
+
+const listener = (e: any, data: any, dispatch: any, type: string) => {
+  switch (type) {
+    case migrationType.RECORDS:
+      saveRecodsMigrate(data, dispatch);
+      break;
+    case appType.GET_FORM_FIELD:
+      getFormField(data, dispatch);
+    default:
+      break;
   }
-  migrateRecords.RecordsFail({
-    status: data.status,
-    error: data.error.message
-  })
 };
 
-const request = (type: string, data: any,migrateRecords:{RecordsFail:(data:migrateRecordsFail)=>void, RecordsRequest:()=>void,RecordsSuccess:(data:migrateRecordsSuccess)=>void}) => {
-  migrateRecords.RecordsRequest()
-  ipcRenderer.send(`${type}-request`, data);
-  ipcRenderer.once(`${type}-response`, (e, dataResponse) => listener(e, dataResponse,  migrateRecords));
+const request = (type: string, data: any, dispatch: any) => {
+  dispatch.request();  
+  setTimeout(() => {
+    ipcRenderer.send(`request`, {data, type});
+    ipcRenderer.once(`response`, (e, dataResponse) => listener(e, dataResponse, dispatch, type));
+  }, 1500);
 };
-export {request}
+export {request};
