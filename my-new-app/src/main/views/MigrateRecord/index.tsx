@@ -1,7 +1,6 @@
-import React, {useState, useContext} from 'react';
-import {parseDataMigrateRecords, parseFieldMapFromTo} from '../../features/migration';
+import React, {useContext} from 'react';
 import {context} from '../../context';
-import {parseJobListToUi, isJobValidMigrate} from '../../features/job';
+import {parseJobListToUi} from '../../features/job';
 
 import Button from '../../components/Button';
 import migrationHook from '../../hooks/migrateHook';
@@ -12,8 +11,6 @@ import {request} from '../../service';
 import './index.css';
 
 const MigrateAllRecord = () => {
-
-
   const {migration, app, job} = useContext(context);
 
   const {status: migrateStatus, error: migrateError, isLoading: migrateLoading} = migration.state as migrateRecordsFail;
@@ -25,20 +22,21 @@ const MigrateAllRecord = () => {
   const error = appError || migrateError;
   const isLoading = appLoading || migrateLoading;
   const status = migrateStatus || appStatus;
-
+  console.log("jobList",jobList);
+  
   const jobListUi = parseJobListToUi(jobList);
-  const isMigrate = isJobValidMigrate(jobList);
-    
+
   return (
     <div className="wrap-migrate-records">
       <ModalStatus error={error} isLoading={isLoading} status={status} />
-      <Table headerList={['Stt', 'job title', 'Action']} rowList={jobListUi} />
+      <Table headerList={['No', 'Job', 'Action']} rowList={jobListUi} />
       {jobList.map((job, key) => {
-        const {migrateInfo}= job;
-        migrateInfo.fields= migrateInfo.fields as string;
+        const {migrateInfo} = job;
+        migrateInfo.fields = migrateInfo.fields as string;
         return (
           <React.Fragment key={key}>
             <ModalMigrate
+              title={job.title}
               fields={migrateInfo.fields}
               query={migrateInfo.query}
               tokenAppTo={migrateInfo.tokenAppTo}
@@ -54,26 +52,15 @@ const MigrateAllRecord = () => {
         );
       })}
 
-      {isMigrate && (
-        <Button
-          label={'Migrate Records'}
-          onClick={() => {
-            // let fieldMapFromTo = parseFieldMapFromTo(fieldMapList);
-            // let migrateRecordsValue = parseDataMigrateRecords({
-            //   fromApp,
-            //   fromDomain,
-            //   toApp,
-            //   toDomain,
-            //   tokenAppFrom,
-            //   tokenAppTo,
-            //   query,
-            //   fields,
-            //   fieldMapFromTo,
-            // });
-            // request('RECORDS', migrateRecordsValue, useMigration);
-          }}
-        />
-      )}
+      <Button
+        label={'Migrate Records'}
+        onClick={() => {
+          for (let i = 0; i < jobList.length; i++) {
+            const job = jobList[i];
+            request('RECORDS', job.migrateInfo, useMigration);
+          }
+        }}
+      />
     </div>
   );
 };

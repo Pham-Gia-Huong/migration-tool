@@ -15,6 +15,5 @@ export default () => {
     getFormFail: (data: migrateRecordsFail) => dispatch(migrationAction.migrateRecordsFail(data)),
 
     clearError:()=> dispatch(baseAction.clearError())
-
   };
 };

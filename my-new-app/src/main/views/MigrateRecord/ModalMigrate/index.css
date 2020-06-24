@@ -15,3 +15,6 @@
   align-items: flex-end;
   flex-direction: column;
 }
+.modal-mirate-title{
+  padding: 10px;
+}

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import './index.css';
 import Sidebar from '../../components/Sidebar';
-import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
+import {faWrench, faUserCog} from '@fortawesome/free-solid-svg-icons';
 import {navigationToPage} from '../../features/left';
 import appHook from '../../hooks/appHook';
 import migrateHook from '../../hooks/migrateHook';
@@ -18,8 +18,8 @@ const LeftSide = ({history}: {history?: any}) => {
           useMigrate.clearError();
         }}
         listItem={[
-          {name: 'Login', icon: faThumbsUp},
-          {name: 'Setting', icon: faThumbsDown},
+          {name: 'Login', icon: faUserCog},
+          {name: 'Setting', icon: faWrench},
         ]}
       />
     </div>

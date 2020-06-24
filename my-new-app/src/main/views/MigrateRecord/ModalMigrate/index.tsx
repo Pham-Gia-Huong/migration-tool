@@ -1,13 +1,14 @@
 import React, {useContext, useState, useEffect} from 'react';
 import ContainerForm from '../ContainerForm';
 import Button from '../../../components/Button';
+import InputField from '../../../components/Input';
 import {ListFieldMap} from '../FieldMap';
 import {parseDataMigrateRecords, parseFieldMapFromTo} from '../../../features/migration';
 import {request} from '../../../service/index';
 import {GET_FORM_FIELD} from '../../../../electronjs/service/app/type';
 import {context} from '../../../context';
 import appHook from '../../../hooks/appHook';
-import {clearJobSelected, addJobMigrateInfor, addFieldMapListToJob, findJobSelected} from '../../../features/job';
+import {clearJobSelected, addJobMigrateInfor, addFieldMapListToJob, findJobSelected, addTitleToJob} from '../../../features/job';
 
 import './index.css';
 import jobHook from '../../../hooks/jobHook';
@@ -51,19 +52,32 @@ const RenderButtonFieldMapList = ({tokenAppTo, toApp, fromDomain, fromApp, token
   }
   return null;
 };
-const RenderButtonSaveMigrate = ({tokenAppTo, toApp, fromDomain, fromApp, tokenAppFrom, toDomain, id, query, fields}: ButtonFieldMap) => {
+const RenderButtonSaveMigrate = ({
+  title,
+  tokenAppTo,
+  toApp,
+  fromDomain,
+  fromApp,
+  tokenAppFrom,
+  toDomain,
+  id,
+  query,
+  fields,
+}: ButtonFieldMap) => {
   const {job} = useContext(context);
   let {jobList} = job.state;
 
   const jobUse = jobHook();
-
   let newJobMatchId = findJobSelected(jobList);
+
   if (newJobMatchId.migrateInfo.fieldMapList.length > 0) {
     let fieldMapList = newJobMatchId.migrateInfo.fieldMapList;
     return (
       <Button
         label={'Save'}
         onClick={() => {
+          console.log('title', title);
+
           let fieldMapFromTo = parseFieldMapFromTo(fieldMapList);
           let migrateRecordsValue = parseDataMigrateRecords({
             fromApp,
@@ -78,7 +92,9 @@ const RenderButtonSaveMigrate = ({tokenAppTo, toApp, fromDomain, fromApp, tokenA
             fieldMapList,
           });
           let newJobList = addJobMigrateInfor(jobList, migrateRecordsValue);
+          newJobList = addTitleToJob(newJobList, title);
           newJobList = clearJobSelected(newJobList);
+
           jobUse.saveJob(newJobList);
         }}
       />
@@ -87,7 +103,7 @@ const RenderButtonSaveMigrate = ({tokenAppTo, toApp, fromDomain, fromApp, tokenA
   return null;
 };
 
-const ModalMigrate = ({id, fields, query, tokenAppTo, toApp, fromDomain, fromApp, tokenAppFrom, toDomain, isOpen}: ModalMigrate) => {
+const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, fromApp, tokenAppFrom, toDomain, isOpen}: ModalMigrate) => {
   const [currentToDomain, setToDomain] = useState(toDomain);
   const [currentFromDomain, setFromDomain] = useState(fromDomain);
   const [currentFromApp, setFromApp] = useState(fromApp);
@@ -96,6 +112,7 @@ const ModalMigrate = ({id, fields, query, tokenAppTo, toApp, fromDomain, fromApp
   const [currentTokenAppTo, setTokenAppTo] = useState(tokenAppTo);
   const [currentQuery, setQuery] = useState(query);
   const [currentFields, setFields] = useState(fields);
+  const [currentTitle, setTitle] = useState(title);
 
   const jobUse = jobHook();
   const appUse = appHook();
@@ -115,7 +132,7 @@ const ModalMigrate = ({id, fields, query, tokenAppTo, toApp, fromDomain, fromApp
   if (!isOpen) {
     return <div></div>;
   }
-  
+
   const resetCurrentJob = () => {
     let job = findJobSelected(jobList);
     let {migrateInfo} = job;
@@ -128,11 +145,15 @@ const ModalMigrate = ({id, fields, query, tokenAppTo, toApp, fromDomain, fromApp
     setTokenAppTo(migrateInfo.tokenAppTo);
     setQuery(migrateInfo.query);
     setFields(fields);
+    setTitle(job.title);
   };
 
   return (
     <div className="modal-migrate-wrapped full-page-center">
       <div className="modal-migrate-content full-page-content">
+        <div className="modal-mirate-title">
+          <InputField type={'text'} label={'Job'} defaultValue={currentTitle} onChange={(value: string) => setTitle(value)} />
+        </div>
         <ContainerForm
           fromDomain={currentFromDomain}
           fromApp={currentFromApp}
@@ -170,6 +191,7 @@ const ModalMigrate = ({id, fields, query, tokenAppTo, toApp, fromDomain, fromApp
           id={id}
           fields={currentFields}
           query={currentQuery}
+          title={currentTitle}
           tokenAppFrom={currentTokenAppFrom}
         />
 

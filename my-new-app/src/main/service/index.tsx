@@ -6,6 +6,8 @@ import {saveRecodsMigrate} from './electron';
 import {getFormField} from './app/index';
 
 const listener = (e: any, data: any, dispatch: any, type: string) => {
+  console.log("listener",data);
+  
   switch (type) {
     case migrationType.RECORDS:
       saveRecodsMigrate(data, dispatch);
@@ -18,7 +20,7 @@ const listener = (e: any, data: any, dispatch: any, type: string) => {
 };
 
 const request = (type: string, data: any, dispatch: any) => {
-  dispatch.request();  
+  dispatch.request();
   setTimeout(() => {
     ipcRenderer.send(`request`, {data, type});
     ipcRenderer.once(`response`, (e, dataResponse) => listener(e, dataResponse, dispatch, type));

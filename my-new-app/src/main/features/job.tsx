@@ -19,7 +19,7 @@ const addJob = (jobList: job[], id: number) => {
   let index = newJobList.findIndex((job) => job.id === id);
   let indexMax = newJobList.findIndex((job) => job.id === max);
 
-  let job = {id: newJobList[indexMax].id + 1, title: '', selected: false, migrateInfo: jobValue.jobList[0].migrateInfo};
+  let job = {id: newJobList[indexMax].id + 1, title: 'My job ' + newJobList[indexMax].id, selected: false, migrateInfo: jobValue.jobList[0].migrateInfo};
   newJobList.splice(index + 1, 0, job);
 
   return newJobList;
@@ -78,15 +78,6 @@ const addFieldMapListToJob = (jobList: job[], id: number, fieldMapList: fieldMap
   return newJobList;
 };
 
-const isJobValidMigrate = (jobList: job[]): boolean => {
-  return jobList.some((job) => {
-    if (job.migrateInfo && job.migrateInfo.query === '') {
-      return false;
-    }
-    return isObjectExistValue(job.migrateInfo);
-  });
-};
-
 const findJobSelected = (jobList: job[]) => {
   let newJobList = JSON.parse(JSON.stringify(jobList)) as job[];
   let jobListMatchId = newJobList.filter((job) => job.selected);
@@ -97,15 +88,15 @@ const findJobSelected = (jobList: job[]) => {
   return newJobMatchId;
 };
 
-
-export {
-  addFieldMapListToJob,
-  findJobSelected,
-  parseJobListToUi,
-  editJob,
-  addJob,
-  deleteJob,
-  clearJobSelected,
-  addJobMigrateInfor,
-  isJobValidMigrate,
+const addTitleToJob = (jobList: job[], title: string) => {
+  let newJobList = JSON.parse(JSON.stringify(jobList)) as job[];
+  newJobList = newJobList.map((job) => {
+    if (job.selected) {
+      job.title = title;
+    }
+    return job;
+  });
+  return newJobList;
 };
+
+export {addFieldMapListToJob,addTitleToJob, findJobSelected, parseJobListToUi, editJob, addJob, deleteJob, clearJobSelected, addJobMigrateInfor};

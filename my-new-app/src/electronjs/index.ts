@@ -1,6 +1,6 @@
 import {app, BrowserWindow, ipcMain} from 'electron';
 import './service/index'
-import { listener } from './service/index';
+import { listener } from './service';
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 

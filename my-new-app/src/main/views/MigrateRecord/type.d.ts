@@ -75,9 +75,11 @@ interface ContainerForm extends FormFilter, InforAuth {
 
 interface ModalMigrate extends InforAuth, FormFilter {
   id: number;
+  title:string;
   isOpen: boolean;
 }
 
 interface ButtonFieldMap extends InforAuth, FormFilter {
   id: number;
+  title?:string;
 }
