@@ -2,9 +2,9 @@ import {Migration} from 'migration-tool';
 
 const parseRecordsFromTo = (records: any, fieldMapList: any) => {
   let newRecord = JSON.parse(JSON.stringify(records));
-  newRecord.map((record) => {
+  newRecord.map((record:any) => {
     for (const key in record) {
-      fieldMapList.forEach((fieldMap) => {
+      fieldMapList.forEach((fieldMap:any) => {
         if (fieldMap.from === key) {
           record[fieldMap.to] = record[key];
           delete record[key];
@@ -16,9 +16,7 @@ const parseRecordsFromTo = (records: any, fieldMapList: any) => {
   return newRecord;
 };
 
-const migrateRecords = (data: any) => {
-  console.log("data",data);
-  
+const migrateRecords = (data: any) => {  
   let migration = new Migration();
   return migration
     .records(

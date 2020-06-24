@@ -58,4 +58,4 @@ const addDataFieldMapList = (fieldMapList: fieldMap[]) => {
   return newFieldMapList;
 };
 
-export {createFieldMapList, updateFromFieldMapValue, addDataFieldMapList};
+export {createFieldMapList, updateFromFieldMapValue, addDataFieldMapList,getKeyValue};

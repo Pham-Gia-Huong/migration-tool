@@ -24,13 +24,15 @@ interface formFieldAction {
     | typeof import('../base/actionType').REQUEST
     | typeof import('./actionType').GET_FORM_SUCCESS
     | typeof import('./actionType').GET_FORM_FAIL
-    | typeof import('../base/actionType').CLEAR_ERROR;
+    | typeof import('../base/actionType').CLEAR_ERROR
 
-  data?: StateApp;
+  data: StateApp;
 }
 
 interface updateFieldMap {
-  type: typeof import('./actionType').UPDATE_FIELD_MAP;
+  type: typeof import('./actionType').UPDATE_FIELD_MAP
+  | typeof import('./actionType').CLEAR_ALL_FIELD_MAP;
+
   data?: {
     records: fieldMap[];
   };

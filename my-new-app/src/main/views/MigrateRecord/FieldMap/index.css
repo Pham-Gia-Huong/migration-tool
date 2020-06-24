@@ -1,6 +1,8 @@
 .field-map-wrapped {
   display: flex;
   margin-bottom: 10px;
+  width: 88%;
+
 }
 .field-map-wrapped > svg{
   margin-right: 10px;

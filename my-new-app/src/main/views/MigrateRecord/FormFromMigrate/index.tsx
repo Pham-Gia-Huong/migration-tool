@@ -10,7 +10,6 @@ const FormInput = ({name, title, domain, app, token, setDomain, setApp, setToken
       <div className="from-form-title">{name}</div>
       <div className="from-form-input">
         <FromFormInput domain={domain} app={app} token={token} setDomain={setDomain} setApp={setApp} setToken={setToken} />
-        <ListFieldMap showIcon={true} indexListString={"fieldCodeFromList"} field={"from"}/>
         <FormFilter query={query} setQuery={setQuery} fields={fields} setFields={setFields} />
       </div>
     </div>

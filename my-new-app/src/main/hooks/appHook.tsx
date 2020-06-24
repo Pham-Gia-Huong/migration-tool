@@ -13,6 +13,8 @@ export default () => {
     getFormFail: (data: formField) => app.dispatch(appAction.getFormFail(data)),
 
     updateFieldMap: (listFieldMap: fieldMap[]) => app.dispatch(appAction.updateFieldMap(listFieldMap)),
-    clearError:()=> app.dispatch(baseAction.clearError())
+    clearError: () => app.dispatch(baseAction.clearError()),
+
+    clearAllFieldMap: () => app.dispatch(appAction.clearAllFieldMap()),
   };
 };

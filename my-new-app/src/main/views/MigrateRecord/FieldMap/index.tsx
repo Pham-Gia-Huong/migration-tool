@@ -4,38 +4,68 @@ import {updateFromFieldMapValue, addDataFieldMapList} from '../../../features/ap
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import appHook from '../../../hooks/appHook';
+import jobHook from '../../../hooks/jobHook';
 import {context} from '../../../context/';
+import {getKeyValue} from '../../../features/app';
+import {addFieldMapListToJob} from '../../../features/job';
 import './index.css';
 
-export const ListFieldMap = ({showIcon, indexListString, field}: {showIcon: boolean; indexListString: string; field: string}) => {
-  const {app: AppContext} = useContext(context);
-  const {records: fieldMapList} = AppContext.state;
+export const ListFieldMap = ({
+  id,
+  showIcon,
+  indexListString,
+  field,
+}: {
+  id: number;
+  showIcon: boolean;
+  indexListString: string;
+  field: string;
+}) => {
+  const {app: AppContext, job} = useContext(context);
+  // const {records: fieldMapList} = AppContext.state;
+  let {jobList} = job.state;
 
   const useApp = appHook();
+  const useJob = jobHook();
 
   return (
     <React.Fragment>
-      {fieldMapList.map((fieldMap,key) => {
-        return (
-          <div className="field-map-wrapped" key={key}>
-            {showIcon && (
-              <FontAwesomeIcon
-                icon={faPlus}
-                onClick={() => {
-                  let newFileMapList = addDataFieldMapList(fieldMapList);
-                  useApp.updateFieldMap(newFileMapList);
-                }}
-              />
-            )}
-            <DropdownForm
-              itemList={fieldMap[indexListString]}
-              onClick={(key, item) => {
-                let newFileMapList = updateFromFieldMapValue(fieldMapList, fieldMap.id, item.value, indexListString, field);
-                useApp.updateFieldMap(newFileMapList);
-              }}
-            />
-          </div>
-        );
+      {jobList.map((job) => {
+        return job.migrateInfo.fieldMapList.map((fieldMap, key) => {
+          if (job.id === id) {
+            return (
+              <div className="field-map-wrapped" key={key}>
+                {showIcon && (
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    onClick={() => {
+                      let newFileMapList = addDataFieldMapList(job.migrateInfo.fieldMapList);
+                      // useApp.updateFieldMap(newFileMapList);
+                      let newJobList = addFieldMapListToJob(jobList, id, newFileMapList);
+                      useJob.saveJob(newJobList);
+                    }}
+                  />
+                )}
+                <DropdownForm
+                  itemList={fieldMap[indexListString]}
+                  label={getKeyValue(field)(fieldMap).label}
+                  onClick={(key, item) => {
+                    let newFileMapList = updateFromFieldMapValue(
+                      job.migrateInfo.fieldMapList,
+                      fieldMap.id,
+                      item.value,
+                      indexListString,
+                      field
+                    );
+                    let newJobList = addFieldMapListToJob(jobList, id, newFileMapList);
+                    useJob.saveJob(newJobList);
+                    // useApp.updateFieldMap(newFileMapList);
+                  }}
+                />
+              </div>
+            );
+          }
+        });
       })}
     </React.Fragment>
   );

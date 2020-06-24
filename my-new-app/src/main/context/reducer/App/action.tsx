@@ -27,4 +27,13 @@ const getFormFail = (data: formField): ActionApp => ({
   },
 });
 
-export {getFormSuccess, getFormFail, updateFieldMap};
+const clearAllFieldMap = (): ActionApp => {
+  return {
+    type: actionCreator.CLEAR_ALL_FIELD_MAP,
+    data: {
+      records: [],
+    },
+  };
+};
+
+export {getFormSuccess, getFormFail, updateFieldMap,clearAllFieldMap};

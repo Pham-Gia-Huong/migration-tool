@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import InputField from '../../components/Input';
 import Button from '../../components/Button';
-import authHook from '../../hooks/authHook';
+import {setInfoUser, isExistInfoUser} from '../../features/login';
+
 import './index.css';
+
 const Login = () => {
   const [domain, setDomain] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const useAuth = authHook();
+  const [isExistUser, setIsExistUser] = useState(isExistInfoUser());
 
   return (
     <div className="login">
@@ -16,13 +18,14 @@ const Login = () => {
         <InputField type={'string'} label="username" defaultValue={username} onChange={(value) => setUsername(value as string)} />
         <InputField type={'string'} label="password" defaultValue={password} onChange={(value) => setPassword(value as string)} />
         <Button
-          label={'Submid'}
+          label={isExistUser ? 'Add' : 'Create'}
           onClick={() => {
-            let login = {
-              domain,
-              auth: btoa(`${username}:${password}`),
-            };
-            // useAuth.login(login);
+            // let login = {
+            //   domain,
+            //   auth: btoa(`${username}:${password}`),
+            // };
+            setInfoUser({domain, username, password});
+            setIsExistUser(isExistInfoUser());
           }}
         />
       </div>

@@ -1,0 +1,17 @@
+.field-map-from-to {
+  display: flex;
+  width: 100%;
+  padding: 0px 10px;
+}
+.field-map-from {
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.field-map-to {
+  display: flex;
+  width: 50%;
+  align-items: flex-end;
+  flex-direction: column;
+}

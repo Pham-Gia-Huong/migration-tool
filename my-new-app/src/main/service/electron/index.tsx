@@ -1,6 +1,4 @@
-const saveRecodsMigrate = (data: any, dispatch: any) => {
-  console.log("data",data);
-  
+const saveRecodsMigrate = (data: any, dispatch: any) => {  
   if (!data.error) {
     dispatch.RecordsSuccess({
       status: data.status,

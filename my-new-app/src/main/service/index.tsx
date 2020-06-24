@@ -2,7 +2,7 @@ import {ipcRenderer} from 'electron';
 import * as migrationType from '../../electronjs/service/migration/type';
 import * as appType from '../../electronjs/service/app/type';
 
-import {saveRecodsMigrate} from './electron/';
+import {saveRecodsMigrate} from './electron';
 import {getFormField} from './app/index';
 
 const listener = (e: any, data: any, dispatch: any, type: string) => {

@@ -7,8 +7,9 @@ interface ContextProps {
     state: StateMigrate;
     dispatch: React.Dispatch<ActionMigrate>;
   };
-  // app: {
-  //   state: StateMigrate;
-  //   dispatch: React.Dispatch<ActionMigrate>;
-  // };
+  job: {
+    state: JobState;
+    dispatch: React.Dispatch<JobAction>;
+  };
+  
 }

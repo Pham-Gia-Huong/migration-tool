@@ -1,6 +1,7 @@
 interface Authentication {
   domain: string;
-  auth: string;
+  username: string;
+  password:string;
 }
 
 interface AuthAction {

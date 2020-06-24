@@ -31,15 +31,15 @@ const ContainerForm = ({
     let parentNode = document.getElementsByClassName('wrap-from')[0] as HTMLElement;
     parentNode.style.border = 'none';
   };
-  const ContainerAdd = () => {
-    return (
-      <div className="wrap-from-add">
-        <div className="wrap-from-add-hover" onMouseOver={hoverContainer} onMouseOut={removeHoverContainer}>
-          <FontAwesomeIcon icon={faPlusCircle} />
-        </div>
-      </div>
-    );
-  };
+  // const ContainerAdd = () => {
+  //   return (
+  //     <div className="wrap-from-add">
+  //       <div className="wrap-from-add-hover" onMouseOver={hoverContainer} onMouseOut={removeHoverContainer}>
+  //         <FontAwesomeIcon icon={faPlusCircle} />
+  //       </div>
+  //     </div>
+  //   );
+  // };
   return (
     <div className="wrap-from">
       <FormFromMigrate
@@ -69,7 +69,7 @@ const ContainerForm = ({
         setApp={setToApp}
         setToken={setTokenAppTo}
       />
-      <ContainerAdd />
+      {/* <ContainerAdd /> */}
     </div>
   );
 };

@@ -1,14 +1,32 @@
-body,html {
+body,
+html {
   margin: 0;
   padding: 0;
 }
-*{
+* {
   box-sizing: border-box;
 }
-.container-main{
+.container-main {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
   height: 100vh;
   width: 100vw;
+}
+
+.full-page-center {
+  position: fixed;
+  top: 0;
+  left: 9;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.75);
+}
+.full-page-content {
+  background: white;
+  z-index: 999;
 }

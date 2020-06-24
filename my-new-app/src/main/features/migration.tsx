@@ -8,22 +8,10 @@ const parseDataMigrateRecords = ({
   query,
   fields,
   fieldMapFromTo,
-}: {
-  fromDomain: string;
-  toDomain: string;
-  fromApp: number;
-  toApp: number;
-  tokenAppFrom: string;
-  tokenAppTo: string;
-  query?: string;
-  fields?: string;
-  fieldMapFromTo?: {
-    from: string;
-    to: string;
-  }[];
-}) => {
-  let fieldsList = [] as any[];
-  if (fields) {
+  fieldMapList,
+}: MigrateInfor) => {
+  let fieldsList = [] as string[];
+  if (typeof fields === "string" && fields) {
     fieldsList = fields.split(',');
   }
   return {
@@ -36,6 +24,7 @@ const parseDataMigrateRecords = ({
     query,
     fields: fieldsList,
     fieldMapFromTo,
+    fieldMapList
   };
 };
 

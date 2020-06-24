@@ -5,10 +5,10 @@ interface ModalMirateStatus {
 }
 
 interface FormFilter {
-  query: string;
-  fields: string;
-  setQuery: (value: string) => void;
-  setFields: (value: string) => void;
+  query?: string;
+  fields?: string;
+  setQuery?: (value: string) => void;
+  setFields?: (value: string) => void;
 }
 
 interface AppForm {
@@ -48,6 +48,22 @@ interface InforAuth {
   tokenAppTo: string;
 }
 
+interface MigrateInfor {
+  fromDomain: string;
+  toDomain: string;
+  fromApp: number;
+  toApp: number;
+  tokenAppFrom: string;
+  tokenAppTo: string;
+  query?: string;
+  fields?: string | string[];
+  fieldMapList?: fieldMap[];
+  fieldMapFromTo?: {
+    from: string;
+    to: string;
+  }[];
+}
+
 interface ContainerForm extends FormFilter, InforAuth {
   setToDomain: React.Dispatch<React.SetStateAction<string>>;
   setToApp: React.Dispatch<React.SetStateAction<number>>;
@@ -55,4 +71,13 @@ interface ContainerForm extends FormFilter, InforAuth {
   setFromDomain: React.Dispatch<React.SetStateAction<string>>;
   setTokenAppFrom: React.Dispatch<React.SetStateAction<string>>;
   setFromApp: React.Dispatch<React.SetStateAction<number>>;
+}
+
+interface ModalMigrate extends InforAuth, FormFilter {
+  id: number;
+  isOpen: boolean;
+}
+
+interface ButtonFieldMap extends InforAuth, FormFilter {
+  id: number;
 }

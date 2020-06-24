@@ -1,0 +1,26 @@
+.table-wrapped {
+  max-height: 200px;
+  width: 100%;
+  overflow: auto;
+}
+.table-wrapped > table {
+  width: 100%;
+}
+
+.table-wrapped table,
+.table-wrapped td,
+.table-wrapped th {
+  border-collapse: collapse;
+}
+
+.table-thead,
+.table-column {
+  color: black;
+  padding: 10px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.table-row-item:hover {
+  background: #f5f5f5;
+}
