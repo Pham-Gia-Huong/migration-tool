@@ -29,4 +29,6 @@ html {
 .full-page-content {
   background: white;
   z-index: 999;
+  overflow: auto;
+  max-height: 700px;
 }

@@ -8,9 +8,9 @@ export const jobValue = {
         fromDomain: 'tgbn0.kintone.com',
         toDomain: 'tgbn0.kintone.com',
         fromApp: 64,
-        toApp: 62,
+        toApp: 65,
         tokenAppFrom: 'HRhgWLLZMgUFJiwgQvNjOEnrI01yo7TmgeXG1WxK',
-        tokenAppTo: 'Dcsu8qbM0p0Ei2XtGEHqw693W4v5pXwgShBnODIj',
+        tokenAppTo: 'iYId8AF6vk97M89nACpw8SOLwAqafNyZ4EZ3fwNv',
         query: '',
         fields: '',
         fieldMapList: [] as any[],
@@ -28,12 +28,12 @@ export const jobValue = {
       selected: false,
       migrateInfo: {
         fromDomain: 'tgbn0.kintone.com',
-        toDomain: 'tgbn0.kintone.com',
+        toDomain: 'k24dk4ukmova.cybozu.com',
         fromApp: 64,
-        toApp: 62,
+        toApp: 1,
         tokenAppFrom: 'HRhgWLLZMgUFJiwgQvNjOEnrI01yo7TmgeXG1WxK',
-        tokenAppTo: 'Dcsu8qbM0p0Ei2XtGEHqw693W4v5pXwgShBnODIj',
-        query: '',
+        tokenAppTo: 'eJR8HQfaAg54M1fUg6qMEhlDYspYqfr7QAEfR9OP',
+        query: 'text = "item 4" order by Record_number desc limit 20 offset 0',
         fields: '',
         fieldMapList: [] as any[],
         fieldMapFromTo: [
@@ -46,3 +46,4 @@ export const jobValue = {
     },
   ],
 };
+
