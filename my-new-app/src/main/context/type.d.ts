@@ -11,5 +11,9 @@ interface ContextProps {
     state: JobState;
     dispatch: React.Dispatch<JobAction>;
   };
+  log: {
+    state: LogState;
+    dispatch: React.Dispatch<LogAction>;
+  };
   
 }

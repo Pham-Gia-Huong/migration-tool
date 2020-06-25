@@ -10,4 +10,16 @@ const navigationToPage = (key:number, item:any, history:any) => {
       break;
   }
 };
-export {navigationToPage};
+const detectSeleted=(listItem,pathName)=>{
+  let listSelected = listItem.map((item,key) => {
+    if(pathName === item.pathName)
+    {
+      item.selected = true;
+      return item;
+    }
+    item.selected=false;
+    return item;
+  })
+  return listSelected
+}
+export {navigationToPage,detectSeleted};

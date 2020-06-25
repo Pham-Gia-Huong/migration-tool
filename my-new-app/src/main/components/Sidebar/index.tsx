@@ -6,9 +6,11 @@ import {Item} from './type';
 const ItemList = ({listItem, onClick}: {onClick?: (index:number,item:Item) => void; listItem: Item[]}) => {
   return (
     <React.Fragment>
-      {listItem.map((item, key) => {        
+      {listItem.map((item, key) => {  
         return (
-          <div className="sidebar-item" key={key} onClick={()=> onClick(key, item)}>
+          <div className={`sidebar-item ${item.selected ? "selected" :""}`} key={key} onClick={()=> {
+            onClick(key, item);           
+          }}>
             <div className="sidebar-item-icon">
               <FontAwesomeIcon icon={item.icon} />
             </div>

@@ -9,6 +9,8 @@ import {migrationValue} from './reducer/electronService/defaultData';
 import {defaulFormField} from './reducer/App/defautData';
 import {jobValue} from './reducer/job/defaultData';
 import jobReducer from './reducer/job';
+import logReducer from './reducer/log'
+import {logValue} from './reducer/log/defaultData'
 const context = React.createContext<Partial<ContextProps>>({});
 const Provider = (props: JSX.ElementChildrenAttribute) => {
   const [elState, elDispatch] = useReducer(electronReducer, migrationValue);
@@ -16,6 +18,7 @@ const Provider = (props: JSX.ElementChildrenAttribute) => {
   const [appState, appDispatch] = useReducer(appRecuder, defaulFormField);
 
   const [jobState, jobDispatch] = useReducer(jobReducer, jobValue);
+  const [logState, logDispatch] = useReducer(logReducer, logValue);
 
   const combine = {
     app: {
@@ -30,6 +33,10 @@ const Provider = (props: JSX.ElementChildrenAttribute) => {
       state: jobState,
       dispatch: jobDispatch,
     },
+    log:{
+      state:logState,
+      dispatch:logDispatch
+    }
   };
   return <context.Provider value={combine}>{props.children}</context.Provider>;
 };

@@ -1,3 +1,7 @@
+import { MIGRATE_RECORDS } from "../../electronjs/service/migration/type";
+import { request } from "../service";
+import { addLog } from "./log";
+
 const parseDataMigrateRecords = ({
   fromDomain,
   toDomain,
@@ -46,4 +50,15 @@ const isLoadMigrateRecords = (status: string) => {
   return false;
 };
 
-export {parseDataMigrateRecords, isLoadMigrateRecords, parseFieldMapFromTo};
+const handleMigrate= async (logList:Log[], jobList:job[],useMigration:MigrateHook)=>{
+  let newJobList = JSON.parse(JSON.stringify(jobList))
+  let newLogList= JSON.parse(JSON.stringify(logList));
+  for (let i = 0; i < newJobList.length; i++) {
+    const job = jobList[i];
+    let log = await request(MIGRATE_RECORDS, job.migrateInfo, useMigration) as Log;
+    addLog(newLogList,log);
+  }
+  return newLogList;
+}
+
+export {parseDataMigrateRecords,handleMigrate, isLoadMigrateRecords, parseFieldMapFromTo};

@@ -35,11 +35,15 @@ const TableHeaderList = ({headerList}: {headerList: any}) => {
   );
 };
 
-const Table = ({headerList, rowList}: {headerList: any; rowList: any}) => {
+const Table = ({headerList, rowList,title}: {title?:string;headerList: any; rowList: any}) => {
   return (
     <div className="table-wrapped">
       <table>
         <thead>
+          {title &&
+          <tr>
+            <th className="table-thead" colSpan={headerList.length}>{title}</th>
+          </tr>}
           <tr>
             <TableHeaderList headerList={headerList} />
           </tr>

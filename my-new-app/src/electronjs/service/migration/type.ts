@@ -1,1 +1,1 @@
-export const RECORDS= "RECORDS"
+export const MIGRATE_RECORDS= "MIGRATE_RECORDS"

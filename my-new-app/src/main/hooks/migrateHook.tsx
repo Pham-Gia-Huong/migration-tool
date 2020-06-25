@@ -2,6 +2,7 @@ import * as migrationAction from '../context/reducer/electronService/action';
 import * as baseAction from '../context/reducer/base/action';
 import {context} from '../context';
 import {useContext} from 'react';
+
 export default () => {
   const {migration} = useContext(context);
   let dispatch = migration.dispatch;
@@ -15,5 +16,5 @@ export default () => {
     getFormFail: (data: migrateRecordsFail) => dispatch(migrationAction.migrateRecordsFail(data)),
 
     clearError:()=> dispatch(baseAction.clearError())
-  };
+  } as migrateHook;
 };

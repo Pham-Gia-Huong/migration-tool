@@ -12,6 +12,8 @@ import {clearJobSelected, addJobMigrateInfor, addFieldMapListToJob, findJobSelec
 
 import './index.css';
 import jobHook from '../../../hooks/jobHook';
+import {addLog} from '../../../features/log';
+import logHook from '../../../hooks/logHook';
 const FieldMapFromTo = ({id}: {id: number}) => {
   return (
     <div className="field-map-from-to">
@@ -26,17 +28,20 @@ const FieldMapFromTo = ({id}: {id: number}) => {
 };
 
 const RenderButtonFieldMapList = ({tokenAppTo, toApp, fromDomain, fromApp, tokenAppFrom, toDomain, id}: ButtonFieldMap) => {
-  const {job} = useContext(context);
+  const {job,log} = useContext(context);
   let {jobList} = job.state;
-
+  
+  const useLog = logHook();
   const useApp = appHook();
+
   let newJobMatchId = findJobSelected(jobList);
+  const logList = JSON.parse(JSON.stringify(log.state.listLog));
 
   if (newJobMatchId.migrateInfo.fieldMapList.length === 0) {
     return (
       <Button
         label={'Get form field'}
-        onClick={() => {
+        onClick={async () => {
           let formFieldMigrate = parseDataMigrateRecords({
             fromApp,
             fromDomain,
@@ -45,7 +50,9 @@ const RenderButtonFieldMapList = ({tokenAppTo, toApp, fromDomain, fromApp, token
             tokenAppFrom,
             tokenAppTo,
           });
-          request(GET_FORM_FIELD, formFieldMigrate, useApp);
+          let log = await request(GET_FORM_FIELD, formFieldMigrate, useApp) as Log;
+          addLog(logList, log);
+          useLog.saveLog(logList)   
         }}
       />
     );
@@ -76,8 +83,6 @@ const RenderButtonSaveMigrate = ({
       <Button
         label={'Save'}
         onClick={() => {
-          console.log('title', title);
-
           let fieldMapFromTo = parseFieldMapFromTo(fieldMapList);
           let migrateRecordsValue = parseDataMigrateRecords({
             fromApp,
