@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faArrowDown} from '@fortawesome/free-solid-svg-icons';
+
 import './index.css';
 const ItemList = ({
   itemList,
@@ -37,13 +40,16 @@ const Dropdown = ({itemList, onClick, label = ''}: {label: string; onClick: (key
   return (
     <div className="dropdown">
       <div
-        className="dropdown-text"
+        className="dropdown-show"
         onClick={() => {
           let displayStyle = {display: 'block'};
           setStyle(displayStyle);
         }}
       >
-        {itemState}
+        <div className="dropdown-icon">
+          <FontAwesomeIcon icon={faArrowDown} />
+        </div>
+        <div className="dropdown-text"> {itemState}</div>
       </div>
 
       <ItemList

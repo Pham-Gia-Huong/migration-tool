@@ -49,7 +49,7 @@ const deleteJob = (jobList: job[], id: number) => {
     if (job.id === id) {
       newJobList.splice(i, 1);
     }
-  });  
+  });
   return newJobList;
 };
 const clearJobSelected = (jobList: job[]) => {
@@ -93,6 +93,11 @@ const findJobSelected = (jobList: job[]) => {
   return newJobMatchId;
 };
 
+const hasJobSelected = (jobList: job[]) => {
+  let newJobList = JSON.parse(JSON.stringify(jobList)) as job[];
+  return newJobList.some((job) => job.selected);
+};
+
 const addTitleToJob = (jobList: job[], title: string) => {
   let newJobList = JSON.parse(JSON.stringify(jobList)) as job[];
   newJobList = newJobList.map((job) => {
@@ -127,4 +132,5 @@ export {
   clearJobSelected,
   addJobMigrateInfor,
   unSaveJob,
+  hasJobSelected
 };

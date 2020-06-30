@@ -12,6 +12,9 @@
   color: white;
   padding: 5px 10px;
 }
+.dropdown-show {
+  position: relative;
+}
 
 .dropdown-item {
   background: gray;
@@ -21,4 +24,12 @@
 
 .dropdown-item:hover {
   background: #fff;
+}
+.dropdown-icon {
+  position: absolute;
+  color: white;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
 }
