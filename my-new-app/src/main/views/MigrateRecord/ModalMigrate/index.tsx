@@ -114,7 +114,8 @@ const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, 
     setTokenAppTo(tokenAppTo);
     setQuery(query);
     setFields(fields);
-  }, [fields, query, tokenAppTo, tokenAppFrom, toApp, fromApp, fromDomain, toDomain]);
+    setTitle(title);
+  }, [title, fields, query, tokenAppTo, tokenAppFrom, toApp, fromApp, fromDomain, toDomain]);
 
   useEffect(() => {
     clearTimeout(time);
@@ -125,7 +126,7 @@ const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, 
     }
   }, [isOpen, currentToDomain, currentFromApp, currentFromDomain, currentToApp, currentTokenAppFrom, currentTokenAppTo]);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (newJobMatchId && newJobMatchId.migrateInfo.fieldMapList.length === 0 && call) {
       (async () => {
         await getFieldAndUpdateLog(

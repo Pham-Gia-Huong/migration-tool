@@ -14,12 +14,7 @@ export const jobValue = {
         query: '',
         fields: '',
         fieldMapList: [] as any[],
-        fieldMapFromTo: [
-          {
-            from: '',
-            to: '',
-          },
-        ],
+        fieldMapFromTo: [],
       },
     },
     {
@@ -36,12 +31,7 @@ export const jobValue = {
         query: 'text = "item 4" order by Record_number desc limit 20 offset 0',
         fields: '',
         fieldMapList: [] as any[],
-        fieldMapFromTo: [
-          {
-            from: '',
-            to: '',
-          },
-        ],
+        fieldMapFromTo: [],
       },
     },
     {
@@ -58,14 +48,8 @@ export const jobValue = {
         query: 'text = "item 4" order by Record_number desc limit 20 offset 0',
         fields: '',
         fieldMapList: [] as any[],
-        fieldMapFromTo: [
-          {
-            from: '',
-            to: '',
-          },
-        ],
+        fieldMapFromTo: [],
       },
     },
   ],
 };
-

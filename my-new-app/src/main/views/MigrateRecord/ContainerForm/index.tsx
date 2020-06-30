@@ -23,23 +23,7 @@ const ContainerForm = ({
   query,
   fields,
 }: ContainerForm) => {
-  const hoverContainer = () => {
-    let parentNode = document.getElementsByClassName('wrap-from')[0] as HTMLElement;
-    parentNode.style.border = '2px solid #34242454';
-  };
-  const removeHoverContainer = () => {
-    let parentNode = document.getElementsByClassName('wrap-from')[0] as HTMLElement;
-    parentNode.style.border = 'none';
-  };
-  // const ContainerAdd = () => {
-  //   return (
-  //     <div className="wrap-from-add">
-  //       <div className="wrap-from-add-hover" onMouseOver={hoverContainer} onMouseOut={removeHoverContainer}>
-  //         <FontAwesomeIcon icon={faPlusCircle} />
-  //       </div>
-  //     </div>
-  //   );
-  // };
+  
   return (
     <div className="wrap-from">
       <FormFromMigrate

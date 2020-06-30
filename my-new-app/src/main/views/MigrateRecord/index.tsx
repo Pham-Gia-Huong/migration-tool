@@ -7,14 +7,14 @@ import migrationHook from '../../hooks/migrateHook';
 import ModalStatus from '../ModalStatus';
 import Table from '../../components/Table';
 import ModalMigrate from './ModalMigrate';
-import logHook from '../../hooks/logHook'
+import logHook from '../../hooks/logHook';
 import LogResult from '../Log';
 
 import './index.css';
-import { handleMigrate } from '../../features/migration';
+import {handleMigrate} from '../../features/migration';
 
 const MigrateAllRecord = () => {
-  const {migration, app, job,log} = useContext(context);
+  const {migration, app, job, log} = useContext(context);
 
   const {status: migrateStatus, error: migrateError, isLoading: migrateLoading} = migration.state as migrateRecordsFail;
   const {records: fieldMapList, isLoading: appLoading, error: appError, status: appStatus} = app.state;
@@ -26,16 +26,17 @@ const MigrateAllRecord = () => {
   const error = appError || migrateError;
   const isLoading = appLoading || migrateLoading;
   const status = migrateStatus || appStatus;
-  
+
   const jobListUi = parseJobListToUi(jobList);
-  const logList = log.state.listLog
+  const logList = log.state.listLog;
+  let disabled = jobList.every((job) => job.migrateInfo.fieldMapFromTo.length === 0);
 
   return (
     <div className="wrap-migrate-records">
       <ModalStatus error={error} isLoading={isLoading} status={status} />
-      <Table title={"Migration"} headerList={['No', 'Job', 'Action']} rowList={jobListUi} />
+      <Table title={'Migration'} headerList={['No', 'Job', 'Action']} rowList={jobListUi} />
       {jobList.map((job, key) => {
-        const {migrateInfo} = job;        
+        const {migrateInfo} = job;
         migrateInfo.fields = migrateInfo.fields as string;
         return (
           <React.Fragment key={key}>
@@ -57,13 +58,14 @@ const MigrateAllRecord = () => {
       })}
 
       <Button
+        disabled={disabled}
         label={'Migrate Records'}
-        onClick={async () =>{
-         let newLogList= await  handleMigrate(logList,jobList,useMigration);
-         useLog.saveLog(newLogList)            
+        onClick={async () => {
+          let newLogList = await handleMigrate(logList, jobList, useMigration);
+          useLog.saveLog(newLogList);
         }}
       />
-      <LogResult/>
+      <LogResult />
     </div>
   );
 };

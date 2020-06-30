@@ -45,13 +45,14 @@ const createFieldMapList = (data: any) => {
 };
 const getKeyValue = (key: string) => (obj: Record<string, any>) => obj[key];
 
-const updateFromFieldMapValue = (fieldMapList: fieldMap[], id: number, value: string, prefixList: string, prefixChange: string) => {
+const updateFromFieldMapValue = (fieldMapList: fieldMap[], id: number, item: Item, prefixList: string, prefixChange: string) => {
   let newFieldMapList = JSON.parse(JSON.stringify(fieldMapList)) as fieldMap[];
   newFieldMapList.map((fieldMap) => {
     getKeyValue(prefixList)(fieldMap).map((fieldValue: string) => {
       if (fieldMap.id === id) {
-        getKeyValue(prefixChange)(fieldMap).value = value;
-        getKeyValue(prefixChange)(fieldMap).label = value.toLocaleLowerCase();
+        getKeyValue(prefixChange)(fieldMap).value = item.value;
+        getKeyValue(prefixChange)(fieldMap).label = item.value.toLocaleLowerCase();
+        getKeyValue(prefixChange)(fieldMap).type = item.type;
       }
       return fieldValue;
     });

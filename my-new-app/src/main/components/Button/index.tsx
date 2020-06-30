@@ -1,8 +1,14 @@
 import React from 'react';
-import './index.css'
-const Button = ({label, onClick}: {label: string; onClick: () => void}) => {
+import './index.css';
+const Button = ({label, onClick, disabled}: {disabled?: boolean; label: string; onClick: () => void}) => {
+  const disableStyle: React.CSSProperties = disabled
+    ? {
+        opacity: '0.5',
+        pointerEvents: 'none',
+      }
+    : {opacity: '1', pointerEvents: 'initial'};
   return (
-    <div className="button" onClick={onClick}>
+    <div className="button" onClick={onClick} style={disableStyle}>
       {label}
     </div>
   );

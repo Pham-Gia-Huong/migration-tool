@@ -50,10 +50,12 @@ export const ListFieldMap = ({
                   itemList={fieldMap[indexListString]}
                   label={getKeyValue(field)(fieldMap).label}
                   onClick={(key, item) => {
+                    console.log("item",item);
+                    
                     let newFileMapList = updateFromFieldMapValue(
                       job.migrateInfo.fieldMapList,
                       fieldMap.id,
-                      item.value,
+                      item,
                       indexListString,
                       field
                     );
