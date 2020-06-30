@@ -8,10 +8,8 @@ import ModalStatus from '../ModalStatus';
 import Table from '../../components/Table';
 import ModalMigrate from './ModalMigrate';
 import logHook from '../../hooks/logHook'
-import {request} from '../../service';
 import LogResult from '../Log';
-import {MIGRATE_RECORDS} from '../../../electronjs/service/migration/type'
-import {addLog} from '../../features/log'
+
 import './index.css';
 import { handleMigrate } from '../../features/migration';
 
@@ -37,7 +35,7 @@ const MigrateAllRecord = () => {
       <ModalStatus error={error} isLoading={isLoading} status={status} />
       <Table title={"Migration"} headerList={['No', 'Job', 'Action']} rowList={jobListUi} />
       {jobList.map((job, key) => {
-        const {migrateInfo} = job;
+        const {migrateInfo} = job;        
         migrateInfo.fields = migrateInfo.fields as string;
         return (
           <React.Fragment key={key}>

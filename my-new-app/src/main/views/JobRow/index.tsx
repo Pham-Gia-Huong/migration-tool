@@ -12,7 +12,7 @@ const JobRow = ({id}: {id: number}) => {
   const {job} = useContext(context);
   const jobUse = jobHook();
   let jobState = job.state;
-
+    
   const handleDelete = (id: number) => {
     let newJobList = deleteJob(jobState.jobList, id);
     jobUse.saveJob(newJobList);

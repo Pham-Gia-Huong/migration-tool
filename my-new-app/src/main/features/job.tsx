@@ -1,7 +1,7 @@
 import React from 'react';
 import JobRow from '../views/JobRow';
-import {isObjectExistValue} from '../utils';
 import {jobValue} from '../context/reducer/job/defaultData';
+
 const parseJobListToUi = (jobList: job[]) => {
   let newJobUi = JSON.parse(JSON.stringify(jobList)) as job[];
   let jobUi = newJobUi.map((job) => {
@@ -19,7 +19,12 @@ const addJob = (jobList: job[], id: number) => {
   let index = newJobList.findIndex((job) => job.id === id);
   let indexMax = newJobList.findIndex((job) => job.id === max);
 
-  let job = {id: newJobList[indexMax].id + 1, title: 'My job ' + newJobList[indexMax].id, selected: false, migrateInfo: jobValue.jobList[0].migrateInfo};
+  let job = {
+    id: newJobList[indexMax].id + 1,
+    title: 'My job ' + newJobList[indexMax].id,
+    selected: false,
+    migrateInfo: jobValue.jobList[0].migrateInfo,
+  };
   newJobList.splice(index + 1, 0, job);
 
   return newJobList;
@@ -44,7 +49,7 @@ const deleteJob = (jobList: job[], id: number) => {
     if (job.id === id) {
       newJobList.splice(i, 1);
     }
-  });
+  });  
   return newJobList;
 };
 const clearJobSelected = (jobList: job[]) => {
@@ -99,4 +104,27 @@ const addTitleToJob = (jobList: job[], title: string) => {
   return newJobList;
 };
 
-export {addFieldMapListToJob,addTitleToJob, findJobSelected, parseJobListToUi, editJob, addJob, deleteJob, clearJobSelected, addJobMigrateInfor};
+const unSaveJob = (jobList: job[]) => {
+  let newJobList = JSON.parse(JSON.stringify(jobList)) as job[];
+  newJobList = newJobList.map((job) => {
+    if (job.selected) {
+      job.migrateInfo.fieldMapList = [];
+      job.migrateInfo.fieldMapFromTo = [];
+    }
+    return job;
+  });
+  return newJobList;
+};
+
+export {
+  addFieldMapListToJob,
+  addTitleToJob,
+  findJobSelected,
+  parseJobListToUi,
+  editJob,
+  addJob,
+  deleteJob,
+  clearJobSelected,
+  addJobMigrateInfor,
+  unSaveJob,
+};

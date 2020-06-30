@@ -1,4 +1,5 @@
 interface Item {
+  type:string;
   label: string;
   value: string;
 }
@@ -8,7 +9,8 @@ interface fieldMap {
   from: Item;
   to: Item;
   id: number;
-  [key: string]: string;
+  [key: string?]: string;
+  status:string;
 }
 
 interface formField {

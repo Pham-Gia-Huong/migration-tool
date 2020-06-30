@@ -1,0 +1,1 @@
+{"version":3,"file":"action.js","sourceRoot":"","sources":["../../../../../src/main/context/reducer/job/action.tsx"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA,uDAA2C;AAE9B,QAAA,OAAO,GAAG,UAAC,OAAc;IAEpC,OAAO;QACL,IAAI,EAAE,UAAU,CAAC,QAAQ;QACzB,IAAI,EAAE;YACJ,OAAO,SAAA;SACR;KACF,CAAC;AACJ,CAAC,CAAC"}

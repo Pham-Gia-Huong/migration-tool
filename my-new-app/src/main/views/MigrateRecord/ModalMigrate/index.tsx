@@ -4,15 +4,13 @@ import Button from '../../../components/Button';
 import InputField from '../../../components/Input';
 import {ListFieldMap} from '../FieldMap';
 import {parseDataMigrateRecords, parseFieldMapFromTo} from '../../../features/migration';
-import {request} from '../../../service/index';
-import {GET_FORM_FIELD} from '../../../../electronjs/service/app/type';
+
 import {context} from '../../../context';
 import appHook from '../../../hooks/appHook';
-import {clearJobSelected, addJobMigrateInfor, addFieldMapListToJob, findJobSelected, addTitleToJob} from '../../../features/job';
-
+import {clearJobSelected, addJobMigrateInfor, addFieldMapListToJob, findJobSelected, addTitleToJob, unSaveJob} from '../../../features/job';
+import {getFieldAndUpdateLog} from '../../../service/app';
 import './index.css';
 import jobHook from '../../../hooks/jobHook';
-import {addLog} from '../../../features/log';
 import logHook from '../../../hooks/logHook';
 const FieldMapFromTo = ({id}: {id: number}) => {
   return (
@@ -27,38 +25,6 @@ const FieldMapFromTo = ({id}: {id: number}) => {
   );
 };
 
-const RenderButtonFieldMapList = ({tokenAppTo, toApp, fromDomain, fromApp, tokenAppFrom, toDomain, id}: ButtonFieldMap) => {
-  const {job,log} = useContext(context);
-  let {jobList} = job.state;
-  
-  const useLog = logHook();
-  const useApp = appHook();
-
-  let newJobMatchId = findJobSelected(jobList);
-  const logList = JSON.parse(JSON.stringify(log.state.listLog));
-
-  if (newJobMatchId.migrateInfo.fieldMapList.length === 0) {
-    return (
-      <Button
-        label={'Get form field'}
-        onClick={async () => {
-          let formFieldMigrate = parseDataMigrateRecords({
-            fromApp,
-            fromDomain,
-            toApp,
-            toDomain,
-            tokenAppFrom,
-            tokenAppTo,
-          });
-          let log = await request(GET_FORM_FIELD, formFieldMigrate, useApp) as Log;
-          addLog(logList, log);
-          useLog.saveLog(logList)   
-        }}
-      />
-    );
-  }
-  return null;
-};
 const RenderButtonSaveMigrate = ({
   title,
   tokenAppTo,
@@ -70,6 +36,7 @@ const RenderButtonSaveMigrate = ({
   id,
   query,
   fields,
+  onSave,
 }: ButtonFieldMap) => {
   const {job} = useContext(context);
   let {jobList} = job.state;
@@ -99,7 +66,7 @@ const RenderButtonSaveMigrate = ({
           let newJobList = addJobMigrateInfor(jobList, migrateRecordsValue);
           newJobList = addTitleToJob(newJobList, title);
           newJobList = clearJobSelected(newJobList);
-
+          onSave();
           jobUse.saveJob(newJobList);
         }}
       />
@@ -118,13 +85,64 @@ const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, 
   const [currentQuery, setQuery] = useState(query);
   const [currentFields, setFields] = useState(fields);
   const [currentTitle, setTitle] = useState(title);
+  const [time, setTime] = useState(null);
+  const [call, setCallApi] = useState(null);
+  const [isSaveJob, setIsSaveJob] = useState(false);
 
   const jobUse = jobHook();
   const appUse = appHook();
+  const logUse = logHook();
 
-  const {app, job} = useContext(context);
+  const {
+    app,
+    job,
+    log: {
+      state: {listLog},
+    },
+  } = useContext(context);
   let {jobList} = job.state;
   const {records: fieldMapList} = app.state;
+
+  let newJobMatchId = findJobSelected(jobList);
+
+  useEffect(() => {
+    setToDomain(toDomain);
+    setFromDomain(fromDomain);
+    setFromApp(fromApp);
+    setTokenAppFrom(tokenAppFrom);
+    setToApp(toApp);
+    setTokenAppTo(tokenAppTo);
+    setQuery(query);
+    setFields(fields);
+  }, [fields, query, tokenAppTo, tokenAppFrom, toApp, fromApp, fromDomain, toDomain]);
+
+  useEffect(() => {
+    clearTimeout(time);
+    setCallApi(false);
+    if (isOpen && currentToDomain && currentFromApp && currentFromDomain && currentToApp && currentTokenAppFrom && currentTokenAppTo) {
+      let newTime = setTimeout(() => setCallApi(true), 1500);
+      setTime(newTime);
+    }
+  }, [isOpen, currentToDomain, currentFromApp, currentFromDomain, currentToApp, currentTokenAppFrom, currentTokenAppTo]);
+
+  useEffect(() => {    
+    if (newJobMatchId && newJobMatchId.migrateInfo.fieldMapList.length === 0 && call) {
+      (async () => {
+        await getFieldAndUpdateLog(
+          {
+            fromApp: currentFromApp,
+            fromDomain: currentFromDomain,
+            toApp: currentToApp,
+            toDomain: currentToDomain,
+            tokenAppFrom: currentTokenAppFrom,
+            tokenAppTo: currentTokenAppTo,
+          },
+          {listLog},
+          {appUse, logUse}
+        );
+      })();
+    }
+  }, [call]);
 
   useEffect(() => {
     if (fieldMapList.length > 0) {
@@ -140,6 +158,7 @@ const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, 
 
   const resetCurrentJob = () => {
     let job = findJobSelected(jobList);
+    let currentJob = JSON.parse(JSON.stringify(jobList));
     let {migrateInfo} = job;
     let fields = migrateInfo.fields as string;
     setToDomain(migrateInfo.toDomain);
@@ -151,6 +170,10 @@ const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, 
     setQuery(migrateInfo.query);
     setFields(fields);
     setTitle(job.title);
+    if (!isSaveJob) {
+      currentJob = unSaveJob(currentJob);
+    }
+    return currentJob;
   };
 
   return (
@@ -178,15 +201,6 @@ const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, 
           setFields={setFields}
         />
         <FieldMapFromTo id={id} />
-        <RenderButtonFieldMapList
-          fromDomain={currentFromDomain}
-          fromApp={currentFromApp}
-          toDomain={currentToDomain}
-          toApp={currentToApp}
-          tokenAppTo={currentTokenAppTo}
-          id={id}
-          tokenAppFrom={currentTokenAppFrom}
-        />
         <RenderButtonSaveMigrate
           fromDomain={currentFromDomain}
           fromApp={currentFromApp}
@@ -198,13 +212,15 @@ const ModalMigrate = ({title, id, fields, query, tokenAppTo, toApp, fromDomain, 
           query={currentQuery}
           title={currentTitle}
           tokenAppFrom={currentTokenAppFrom}
+          onSave={() => setIsSaveJob(true)}
         />
 
         <Button
           label={'Close'}
           onClick={() => {
-            let newJobList = clearJobSelected(jobList);
-            resetCurrentJob();
+            let currentJob = resetCurrentJob();
+            let newJobList = clearJobSelected(currentJob);
+
             jobUse.saveJob(newJobList);
           }}
         />

@@ -15,6 +15,8 @@ const addLog =(logList:Log[],log:Log)=>{
   }else {
     newLog.id = logList[logList.length-1].id + 1;
   }
-  logList.push(newLog)
+  logList.push(newLog);
 }
+
+
 export {parseLogList,addLog}

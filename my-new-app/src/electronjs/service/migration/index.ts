@@ -1,22 +1,33 @@
 import {Migration} from 'migration-tool';
 
-const parseRecordsFromTo = (records: any, fieldMapList: any) => {
-  let newRecord = JSON.parse(JSON.stringify(records));
-  newRecord = newRecord.map((record:any) => {
-    for (const key in record) {
-      fieldMapList.forEach((fieldMap:any) => {
+const createRecordMigrate=()=>{
+  
+}
+
+const parseRecordsFromTo = (records: any, fieldMapList: any) => {  
+  let newRecords = JSON.parse(JSON.stringify(records));
+  fieldMapList.map((fieldMap: any) => {
+    newRecords = newRecords.map((record: any) => {
+      let newRecord = JSON.parse(JSON.stringify(record));
+      for (const key in record) {
         if (fieldMap.from === key) {
-          record[fieldMap.to] = record[key];
-          delete record[key];
+          newRecord[fieldMap.to] = record[key];
+          continue;
+        } else if (fieldMap.from !== key && fieldMap.type === record[key].type) {
+          newRecord[fieldMap.to] = record[key];
+          continue;
         }
-      });
-    }
-    return record;
+        // newRecord[fieldMap.to] = record[key]
+      }
+      return newRecord;
+    });
   });
-  return newRecord;
+  console.log("newRecords",newRecords);
+
+  return newRecords;
 };
 
-const migrateRecords = (data: any) => {  
+const migrateRecords = (data: any) => {
   let migration = new Migration();
   return migration
     .records(

@@ -44,6 +44,28 @@ export const jobValue = {
         ],
       },
     },
+    {
+      id: 2,
+      title: 'My job 3',
+      selected: false,
+      migrateInfo: {
+        fromDomain: '',
+        toDomain: '',
+        fromApp: 0,
+        toApp: 0,
+        tokenAppFrom: 'HRhgWLLZMgUFJiwgQvNjOEnrI01yo7TmgeXG1WxK',
+        tokenAppTo: 'eJR8HQfaAg54M1fUg6qMEhlDYspYqfr7QAEfR9OP',
+        query: 'text = "item 4" order by Record_number desc limit 20 offset 0',
+        fields: '',
+        fieldMapList: [] as any[],
+        fieldMapFromTo: [
+          {
+            from: '',
+            to: '',
+          },
+        ],
+      },
+    },
   ],
 };
 
