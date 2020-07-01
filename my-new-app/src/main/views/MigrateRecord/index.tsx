@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {context} from '../../context';
-import {parseJobListToUi} from '../../features/job';
+import {parseJobListToUi, hasJobSelected} from '../../features/job';
 
 import Button from '../../components/Button';
 import migrationHook from '../../hooks/migrateHook';
@@ -29,7 +29,8 @@ const MigrateAllRecord = () => {
 
   const jobListUi = parseJobListToUi(jobList);
   const logList = log.state.listLog;
-  let disabled = jobList.every((job) => job.migrateInfo.fieldMapFromTo.length === 0);
+
+  let disabled = jobList.every((job) => job.migrateInfo.fieldMapFromTo.length === 0) && !hasJobSelected(jobList);
 
   return (
     <div className="wrap-migrate-records">

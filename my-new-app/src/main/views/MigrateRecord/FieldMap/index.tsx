@@ -47,18 +47,12 @@ export const ListFieldMap = ({
                   />
                 )}
                 <DropdownForm
-                  itemList={fieldMap[indexListString]}
+                  itemList={getKeyValue(indexListString)(fieldMap)}
                   label={getKeyValue(field)(fieldMap).label}
                   onClick={(key, item) => {
-                    console.log("item",item);
-                    
-                    let newFileMapList = updateFromFieldMapValue(
-                      job.migrateInfo.fieldMapList,
-                      fieldMap.id,
-                      item,
-                      indexListString,
-                      field
-                    );
+                    console.log('item', item);
+
+                    let newFileMapList = updateFromFieldMapValue(job.migrateInfo.fieldMapList, fieldMap.id, item, indexListString, field);
                     let newJobList = addFieldMapListToJob(jobList, id, newFileMapList);
                     useJob.saveJob(newJobList);
                     // useApp.updateFieldMap(newFileMapList);

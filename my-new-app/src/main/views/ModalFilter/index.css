@@ -1,0 +1,22 @@
+.modal-filter {
+  width: 500px;
+  height: 500px;
+  overflow: auto;
+}
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px;
+}
+.filter-column{
+  margin: 5px;
+}
+.filter-column.value-filter-text > input {
+  background: #FAFAFA;
+
+}
+.filter-column.value-filter-text ~ input:focus {
+  background: blue;
+  
+}

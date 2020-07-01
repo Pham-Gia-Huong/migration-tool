@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import * as actionCreator from './actionType';
 
 export default (state: StateAuth, action: ActionAuth) => {

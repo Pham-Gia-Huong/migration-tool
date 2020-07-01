@@ -3,8 +3,8 @@ interface Log {
   toDomain:string;
   message:string;
   action:string;
-  fromApp:string;
-  toApp:string;
+  from:string;
+  to:string;
   id:number;
 }
 interface TableLog{

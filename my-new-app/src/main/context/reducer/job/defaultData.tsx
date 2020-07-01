@@ -14,7 +14,7 @@ export const jobValue = {
         query: '',
         fields: '',
         fieldMapList: [] as any[],
-        fieldMapFromTo: [],
+        fieldMapFromTo: [] as any[],
       },
     },
     {

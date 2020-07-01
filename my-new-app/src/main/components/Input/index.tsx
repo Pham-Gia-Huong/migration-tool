@@ -3,17 +3,17 @@ import './index.css';
 const InputField = ({
   label,
   onChange,
-  defaultValue,
+  defaultValue = '',
   type = 'text',
 }: {
   type: string;
-  label: string;
+  label?: string;
   onChange: (value: string | number) => void;
-  defaultValue: string | number;
+  defaultValue?: string | number;
 }) => {
   return (
     <div className="input-field">
-      <div className="label">{label}</div>
+      {label ? <div className="label">{label}</div> : ''}
       <input
         type={type}
         value={defaultValue}

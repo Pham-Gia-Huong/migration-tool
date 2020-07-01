@@ -32,7 +32,7 @@ const getTypeBtnLogin = () => {
 const parseListUserToUi = () => {
   let listUser = JSON.parse(localStorage.getItem(USER_INFO_LIST)) as Authentication[];
   let listUserUi = listUser.map((user) => ({
-    content: [`${user.domain}`, `${user.username}`, <InputField type={'password'} readOnly defaultValue={user.password} />],
+    content: [`${user.domain}`, `${user.username}`, <InputField label={"Password"} onChange={()=>{}} type={'password'} defaultValue={user.password} />],
   }));
   return listUserUi;
 };

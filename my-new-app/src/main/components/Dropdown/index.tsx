@@ -34,7 +34,7 @@ const ItemList = ({
     </div>
   );
 };
-const Dropdown = ({itemList, onClick, label = ''}: {label: string; onClick: (key: number, item: any) => void; itemList: any}) => {
+const Dropdown = ({itemList, onClick, label = ''}: {label?: string; onClick: (key: number, item: any) => void; itemList: any}) => {
   const [style, setStyle] = useState({});
   const [itemState, setItem] = useState(label ? label : itemList[0].label);
   return (
